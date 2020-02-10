@@ -27,6 +27,7 @@ public class UserEntity {
 	private String firstName;
 	private String lastName;
 	private String password;
+	private String email;
 	private Long phno;
 	
 	@OneToMany
@@ -44,76 +45,87 @@ public class UserEntity {
 	 
 	 public UserEntity() {}
 	 
-	    public UserEntity(String firstName, String lastName, Long phno, String password) {
+	    public UserEntity(String firstName, String lastName, Long phno, String email, String password) {
 	        this.firstName = firstName;
 	        this.lastName = lastName;
 	        this.phno = phno;
+	        this.email = email;
 	        this.password = password;
 	    }
 
-	public int getId() {
-		return id;
-	}
+		public int getId() {
+			return id;
+		}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+		public void setId(int id) {
+			this.id = id;
+		}
 
-	public String getFirstName() {
-		return firstName;
-	}
+		public String getFirstName() {
+			return firstName;
+		}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+		public void setFirstName(String firstName) {
+			this.firstName = firstName;
+		}
 
-	public String getLastName() {
-		return lastName;
-	}
+		public String getLastName() {
+			return lastName;
+		}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+		public void setLastName(String lastName) {
+			this.lastName = lastName;
+		}
 
-	public String getPassword() {
-		return password;
-	}
+		public String getPassword() {
+			return password;
+		}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+		public void setPassword(String password) {
+			this.password = password;
+		}
 
-	public Long getPhno() {
-		return phno;
-	}
+		public String getEmail() {
+			return email;
+		}
 
-	public void setPhno(Long phno) {
-		this.phno = phno;
-	}
+		public void setEmail(String email) {
+			this.email = email;
+		}
 
-	public User getUserType() {
-		return userType;
-	}
+		public Long getPhno() {
+			return phno;
+		}
 
-	public void setUserType(User userType) {
-		this.userType = userType;
-	}
+		public void setPhno(Long phno) {
+			this.phno = phno;
+		}
 
-	public AddressEntity getAddressId() {
-		return addressId;
-	}
+		public AddressEntity getAddressId() {
+			return addressId;
+		}
 
-	public void setAddressId(AddressEntity addressId) {
-		this.addressId = addressId;
-	}
+		public void setAddressId(AddressEntity addressId) {
+			this.addressId = addressId;
+		}
 
-	public Set<Roles> getRoles() {
-		return roles;
-	}
+		public User getUserType() {
+			return userType;
+		}
 
-	public void setRoles(Set<Roles> roles) {
-		this.roles = roles;
-	}
+		public void setUserType(User userType) {
+			this.userType = userType;
+		}
+
+		public Set<Roles> getRoles() {
+			return roles;
+		}
+
+		public void setRoles(Set<Roles> roles) {
+			this.roles = roles;
+		}
+
+	
 	
 	
 }

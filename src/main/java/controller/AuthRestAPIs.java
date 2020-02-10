@@ -55,7 +55,7 @@ public class AuthRestAPIs {
  
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getEmail(),
+                        loginRequest.getPhno(),
                         loginRequest.getPassword()
                 )
         );
@@ -80,26 +80,26 @@ public class AuthRestAPIs {
  
         // Creating user's account
         UserEntity user = new UserEntity(signUpRequest.getFirstName(), signUpRequest.getLastName(),
-                signUpRequest.getPhno(), encoder.encode(signUpRequest.getPassword()));
+                signUpRequest.getPhno(),signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
  
-        Set<String> strRoles = signUpRequest.getRole();
+        Set<User> strRoles = signUpRequest.getRole();
         Set<Roles> roles = new HashSet<>();
  
         strRoles.forEach(role -> {
           switch(role) {
-          case "manager":
+          case MANAGER:
             Roles managerRole = roleRepository.findByName(User.MANAGER)
                   .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
             roles.add(managerRole);
             
             break;
-          case "general":
+          case GENERAL:
                 Roles generalRole = roleRepository.findByName(User.GENERAL)
                   .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
                 roles.add(generalRole);
                 
             break;
-          case "delivery":
+          case DELIVERY:
               Roles deliveryRole = roleRepository.findByName(User.DELIVERY)
                 .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
               roles.add(deliveryRole);

@@ -17,27 +17,26 @@ public class UserPrinciple implements UserDetails {
 	  private static final long serialVersionUID = 1L;
 	 
 	  private int id;
+	  private String firstName;
+	  private String lastName;
+	  private Long phno;
+	  private String email;
 	 
-	    private String name;
-	 
-	    private String username;
-	 
-	    private String email;
-	 
-	    @JsonIgnore
-	    private String password;
-	 
-	    private Collection<? extends GrantedAuthority> authorities;
-	 
-	    public UserPrinciple(int id, String name, 
-	              String username, Long long1, String password, 
-	              Collection<? extends GrantedAuthority> authorities) {
-	        this.id = id;
-	        this.name = name;
-	        this.username = username;
-	        this.email = email;
-	        this.password = password;
-	        this.authorities = authorities;
+    @JsonIgnore
+    private String password;
+ 
+    private Collection<? extends GrantedAuthority> authorities;
+ 
+    public UserPrinciple(int id, String firstName, String lastName,
+              Long phno,  String email, String password,
+              Collection<? extends GrantedAuthority> authorities) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phno=phno;
+        this.email=email;
+        this.password = password;
+        this.authorities = authorities;
 	    }
 	 
 	   /* public static UserPrinciple build(UserEntity user) {
@@ -65,6 +64,7 @@ public class UserPrinciple implements UserDetails {
 	    			user.getFirstName(),
 	    			user.getLastName(),
 	    			user.getPhno(),
+	    			user.getEmail(),
 	    			user.getPassword(),
 	    			authorities
 	    		);
@@ -74,17 +74,21 @@ public class UserPrinciple implements UserDetails {
 	        return id;
 	    }
 	 
-	    public String getName() {
-	        return name;
+	    public String getFirstName() {
+	    	return firstName;
 	    }
-	 
-	    public String getEmail() {
-	        return email;
+	    
+	    public String getLastName() {
+	    	return lastName;
 	    }
-	 
+	    
+	    public Long getPhno() {
+	    	return phno;
+	    }
+	    
 	    @Override
 	    public String getUsername() {
-	        return username;
+	    	return email;
 	    }
 	 
 	    @Override

@@ -3,6 +3,8 @@ package http.request;
 import java.util.Set;
 
 import javax.validation.constraints.*;
+
+import enums.User;
  
 public class SignUp {
     @NotBlank
@@ -14,14 +16,17 @@ public class SignUp {
     private String lastName;
  
     @NotBlank
-    @Size(max = 60)
+    @Size(max = 60, message="enter 10 digit phone number")
     @Email
     private Long phno;
     
-    private Set<String> role;
+    private Set<User> role;
+    
+    @Size(max=60, message="enter valid email")
+    private String email;
     
     @NotBlank
-    @Size(min = 6, max = 40)
+    @Size(min = 6, max = 40, message="enter a valid password")
     private String password;
 
 	public String getFirstName() {
@@ -48,11 +53,11 @@ public class SignUp {
 		this.phno = phno;
 	}
 
-	public Set<String> getRole() {
+	public Set<User> getRole() {
 		return role;
 	}
 
-	public void setRole(Set<String> role) {
+	public void setRole(Set<User> role) {
 		this.role = role;
 	}
 
@@ -63,6 +68,16 @@ public class SignUp {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
  
         
 }
