@@ -19,7 +19,7 @@ public class UserPrinciple implements UserDetails {
 	  private int id;
 	  private String firstName;
 	  private String lastName;
-	  private Long phno;
+	  private String phno;
 	  private String email;
 	 
     @JsonIgnore
@@ -28,7 +28,7 @@ public class UserPrinciple implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
  
     public UserPrinciple(int id, String firstName, String lastName,
-              Long phno,  String email, String password,
+              String phno,  String email, String password,
               Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.firstName = firstName;
@@ -82,7 +82,7 @@ public class UserPrinciple implements UserDetails {
 	    	return lastName;
 	    }
 	    
-	    public Long getPhno() {
+	    public String getPhno() {
 	    	return phno;
 	    }
 	    

@@ -18,7 +18,7 @@ public class SignUp {
     @NotBlank
     @Size(max = 60, message="enter 10 digit phone number")
     @Email
-    private Long phno;
+    private String phno;
     
     private Set<User> role;
     
@@ -45,11 +45,11 @@ public class SignUp {
 		this.lastName = lastName;
 	}
 
-	public Long getPhno() {
+	public String getPhno() {
 		return phno;
 	}
 
-	public void setPhno(Long phno) {
+	public void setPhno(String phno) {
 		this.phno = phno;
 	}
 

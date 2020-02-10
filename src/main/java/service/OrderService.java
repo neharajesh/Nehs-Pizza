@@ -1,6 +1,7 @@
 package service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,9 @@ public class OrderService {
 	public List<OrderEntity> findLiveOrders() {
 		List<OrderEntity> all = orderRepository.findAll();
 		ArrayList<OrderEntity> live = new ArrayList<OrderEntity>();
-		for(OrderEntity a : all) {
-			if(a.getFlag() == 1) {
-				live.add(a);
+		for(OrderEntity orderEntity : all) {
+			if(orderEntity.getFlag() == 1) {
+				live.add(orderEntity);
 			}
 		}
 		return live;
@@ -34,9 +35,9 @@ public class OrderService {
 	public List<OrderEntity> findPastOrders() {
 		List<OrderEntity> all = orderRepository.findAll();
 		ArrayList<OrderEntity> past = new ArrayList<OrderEntity>();
-		for(OrderEntity a : all) {
-			if(a.getFlag() == 0) {
-				past.add(a);
+		for(OrderEntity orderEntity : all) {
+			if(orderEntity.getFlag() == 0) {
+				past.add(orderEntity);
 			}
 		}
 		return null;
@@ -44,12 +45,13 @@ public class OrderService {
 	
 	//get order by id
 	public OrderEntity findOrderById(int id) {
-		return orderRepository.findById(id).get();
+		Optional<OrderEntity> order = orderRepository.findById(id);
+		return order.get();
 	}
 	
 	//add order
-	public OrderEntity addNewOrder(OrderEntity oe) {
-		return orderRepository.save(oe);
+	public OrderEntity addNewOrder(OrderEntity orderEntity) {
+		return orderRepository.save(orderEntity);
 
 	}
 }

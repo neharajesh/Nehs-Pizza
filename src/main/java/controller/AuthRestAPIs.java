@@ -79,6 +79,14 @@ public class AuthRestAPIs {
         }*/
  
         // Creating user's account
+        /*UserEntity user = UserEntity.builder()
+                .firstName(signUpRequest.getFirstName())
+                .lastName(signUpRequest.getLastName())
+                .phno(signUpRequest.getPhno())
+                .email(signUpRequest.getEmail())
+                .password(encoder.encode(signUpRequest.getPassword()))
+                .build();*/
+        
         UserEntity user = new UserEntity(signUpRequest.getFirstName(), signUpRequest.getLastName(),
                 signUpRequest.getPhno(),signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
  
@@ -89,25 +97,25 @@ public class AuthRestAPIs {
           switch(role) {
           case MANAGER:
             Roles managerRole = roleRepository.findByName(User.MANAGER)
-                  .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                  .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Role not found."));
             roles.add(managerRole);
             
             break;
           case GENERAL:
                 Roles generalRole = roleRepository.findByName(User.GENERAL)
-                  .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                  .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Role not found."));
                 roles.add(generalRole);
                 
             break;
           case DELIVERY:
               Roles deliveryRole = roleRepository.findByName(User.DELIVERY)
-                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Role not found."));
               roles.add(deliveryRole);
               
           break;
           default:
         	  Roles userRole = roleRepository.findByName(User.USER)
-                  .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
+                  .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Role not found."));
               roles.add(userRole);              
           }
         });

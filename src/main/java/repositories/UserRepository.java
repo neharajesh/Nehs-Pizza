@@ -10,7 +10,7 @@ import entities.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 	Optional<UserEntity> findByEmail(String email);
-	Optional<UserEntity> findByPhno(Long phno);
-    Boolean existsByPhno(Long phno);
+	Optional<UserEntity> findByPhno(String phno);
+    Boolean existsByPhno(String phno);
     Boolean existsByEmail(String email);
 }

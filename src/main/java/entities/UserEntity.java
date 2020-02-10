@@ -17,8 +17,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import enums.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name="users")
 public class UserEntity {
 	@Id
@@ -28,7 +36,7 @@ public class UserEntity {
 	private String lastName;
 	private String password;
 	private String email;
-	private Long phno;
+	private String phno;
 	
 	@OneToMany
 	private AddressEntity addressId;
@@ -45,7 +53,7 @@ public class UserEntity {
 	 
 	 public UserEntity() {}
 	 
-	    public UserEntity(String firstName, String lastName, Long phno, String email, String password) {
+	    public UserEntity(String firstName, String lastName, String phno, String email, String password) {
 	        this.firstName = firstName;
 	        this.lastName = lastName;
 	        this.phno = phno;
@@ -93,11 +101,11 @@ public class UserEntity {
 			this.email = email;
 		}
 
-		public Long getPhno() {
+		public String getPhno() {
 			return phno;
 		}
 
-		public void setPhno(Long phno) {
+		public void setPhno(String phno) {
 			this.phno = phno;
 		}
 
