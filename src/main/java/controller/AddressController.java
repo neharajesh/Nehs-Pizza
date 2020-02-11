@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,12 @@ public class AddressController {
 	@GetMapping("/address/{id}")
 	public Address findById(int id) {
 		return addressService.findById(id);
+	}
+	
+	//find address by user id
+	@ModelAttribute("useraddress")
+	public Address findByUser(int id) {
+		return addressService.findByUserID(id);
 	}
 	
 	//add new address 

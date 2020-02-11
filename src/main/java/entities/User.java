@@ -17,16 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import enums.UserRoles;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Table(name="users")
 public class User {
 	@Id
@@ -59,10 +51,8 @@ public class User {
 	        this.phno = phno;
 	        this.email = email;
 	        this.password = password;
-	    }
-	 
-	 
-
+	    }	 
+		
 		public int getId() {
 			return id;
 		}
@@ -134,7 +124,9 @@ public class User {
 		public void setRoles(Set<Roles> roles) {
 			this.roles = roles;
 		}
-		
+
+
+
 		public class Builder {
 			 private  String firstName;
 			 private  String lastName;

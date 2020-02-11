@@ -13,7 +13,6 @@ web\WebConfig.class
 controller\LoginController.class
 security\services\UserPrinciple.class
 service\OrderService.class
-entities\Address$AddressBuilder.class
 security\jwt\JwtAuthTokenFilter.class
 entities\User.class
 controller\ItemsController.class
@@ -27,6 +26,7 @@ http\response\JwtResponse.class
 security\services\UserDetailsServiceImpl.class
 service\ItemsService.class
 security\jwt\JwtAuthEntryPoint.class
+entities\User$Builder.class
 http\request\SignUp.class
 controller\AuthRestAPIs$1.class
 repositories\ItemsRepository.class
@@ -36,5 +36,3 @@ entities\Address.class
 controller\OrdersController.class
 entities\Order.class
 controller\TestRestAPIs.class
-entities\Order$OrderBuilder.class
-entities\User$UserBuilder.class

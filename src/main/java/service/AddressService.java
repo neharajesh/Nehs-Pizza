@@ -24,6 +24,12 @@ public class AddressService {
 		return address.get();
 	}
 	
+	//find address by user id
+	public Address findByUserID(int userid) {
+		Optional<Address> address = addressRepository.findByUserId(userid);
+		return address.get();
+	}
+	
 	//new address
 	public Address addNewAddress(Address addressEntity) {
 		return addressRepository.save(addressEntity);

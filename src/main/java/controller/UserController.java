@@ -26,14 +26,24 @@ public class UserController {
 	
 	//get user details by id
 	/*@GetMapping("/users/{id}")
-	public UserEntity getDetails(@PathVariable int id) {
+	public User getDetails(@PathVariable int id) {
 		return userService.findUserById(id);
 	}*/
 	
 	//add new user
-	@PostMapping("/users/new")
+	/*@PostMapping("/users/new")
 	public User addNewUser(@RequestBody User newUser) {
 		return userService.addNewUser(newUser);
+	}*/
+	
+	//delete user
+	public void deleteExistingUser(@RequestBody User exsitingUser) {
+		userService.deleteUser(exsitingUser);
+	}
+	
+	//update user details
+	public User updateUserDetails(@RequestBody User updatingUser) {
+		return userService.updateUser(updatingUser);
 	}
 	
 }

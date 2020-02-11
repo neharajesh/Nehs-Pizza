@@ -3,9 +3,6 @@ package http.request;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import lombok.Data;
-
-@Data
 public class Login {
 	@NotBlank
 	@Size(min=2, max=60, message="Enter valid phone number")

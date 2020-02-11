@@ -1,4 +1,4 @@
-package controller;
+/*package controller;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,13 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import entities.User;
 import enums.UserRoles;
-import entities.BuilderEntity;
 import entities.Roles;
 import http.request.Login;
 import http.request.SignUp;
 import http.response.JwtResponse;
-import lombok.Builder;
-import lombok.Lombok;
 import repositories.UserRepository;
 import repositories.RoleRepository;
 import security.jwt.JwtProvider;
@@ -76,13 +73,13 @@ public class AuthRestAPIs {
                     HttpStatus.BAD_REQUEST);
         }
  
-        /*if(userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<String>("Fail -> Email is already in use!",
                     HttpStatus.BAD_REQUEST);
-        }*/
+        }
  
         // Creating user's account
-        User user = new User.Builder()
+        User user = new User().new Builder()
                 .setFirstName(signUpRequest.getFirstName())
                 .setLastName(signUpRequest.getLastName())
                 .setPhno(signUpRequest.getPhno())
@@ -90,8 +87,8 @@ public class AuthRestAPIs {
                 .setPassword(encoder.encode(signUpRequest.getPassword()))
                 .build();
         
-       /* User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(),
-                signUpRequest.getPhno(),signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));*/
+        User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(),
+                signUpRequest.getPhno(),signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
  
         Set<UserRoles> strRoles = signUpRequest.getRole();
         Set<Roles> roles = new HashSet<>();
@@ -128,4 +125,4 @@ public class AuthRestAPIs {
  
         return ResponseEntity.ok().body("User registered successfully!");
     }
-}
+}*/

@@ -7,15 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import enums.UserRoles;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Entity
 @Table(name="address")
 public class Address {
