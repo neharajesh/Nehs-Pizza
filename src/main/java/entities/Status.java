@@ -3,23 +3,23 @@ package entities;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
-import enums.Status;
+import enums.StatusTypes;
 
 @Entity
-public class StatusType {
+public class Status {
 	private int id;
 	@ManyToOne
-	private Status name;
+	private StatusTypes name;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Status getName() {
+	public StatusTypes getName() {
 		return name;
 	}
-	public void setName(Status name) {
+	public void setName(StatusTypes name) {
 		this.name = name;
 	}
 	

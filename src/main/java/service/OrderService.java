@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entities.OrderEntity;
+import entities.Order;
 import repositories.OrderRepository;
 
 @Service
@@ -15,15 +15,15 @@ public class OrderService {
 	private OrderRepository orderRepository;
 	
 	//find all orders
-	public List<OrderEntity> findAllOrders() {
+	public List<Order> findAllOrders() {
 		return orderRepository.findAll();
 	}
 	
 	//find live orders
-	public List<OrderEntity> findLiveOrders() {
-		List<OrderEntity> all = orderRepository.findAll();
-		ArrayList<OrderEntity> live = new ArrayList<OrderEntity>();
-		for(OrderEntity orderEntity : all) {
+	public List<Order> findLiveOrders() {
+		List<Order> all = orderRepository.findAll();
+		ArrayList<Order> live = new ArrayList<Order>();
+		for(Order orderEntity : all) {
 			if(orderEntity.getFlag() == 1) {
 				live.add(orderEntity);
 			}
@@ -32,10 +32,10 @@ public class OrderService {
 	}
 	
 	//find past orders
-	public List<OrderEntity> findPastOrders() {
-		List<OrderEntity> all = orderRepository.findAll();
-		ArrayList<OrderEntity> past = new ArrayList<OrderEntity>();
-		for(OrderEntity orderEntity : all) {
+	public List<Order> findPastOrders() {
+		List<Order> all = orderRepository.findAll();
+		ArrayList<Order> past = new ArrayList<Order>();
+		for(Order orderEntity : all) {
 			if(orderEntity.getFlag() == 0) {
 				past.add(orderEntity);
 			}
@@ -44,13 +44,13 @@ public class OrderService {
 	}
 	
 	//get order by id
-	public OrderEntity findOrderById(int id) {
-		Optional<OrderEntity> order = orderRepository.findById(id);
+	public Order findOrderById(int id) {
+		Optional<Order> order = orderRepository.findById(id);
 		return order.get();
 	}
 	
 	//add order
-	public OrderEntity addNewOrder(OrderEntity orderEntity) {
+	public Order addNewOrder(Order orderEntity) {
 		return orderRepository.save(orderEntity);
 
 	}

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import entities.AddressEntity;
+import entities.Address;
 import service.AddressService;
 
 @RestController
@@ -18,19 +18,19 @@ public class AddressController {
 	
 	//find all addresses
 	@GetMapping("/address/all")
-	public List<AddressEntity> all() {
+	public List<Address> all() {
 		return addressService.findAddress();
 	}
 	
 	//find address by id
 	@GetMapping("/address/{id}")
-	public AddressEntity findById(int id) {
+	public Address findById(int id) {
 		return addressService.findById(id);
 	}
 	
 	//add new address 
 	@PostMapping("/address/new")
-	public AddressEntity addNewAddress(@RequestBody AddressEntity ae) {
+	public Address addNewAddress(@RequestBody Address ae) {
 		return addressService.addNewAddress(ae);
 	}
 }

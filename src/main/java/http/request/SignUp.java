@@ -4,7 +4,7 @@ import java.util.Set;
 
 import javax.validation.constraints.*;
 
-import enums.User;
+import enums.UserRoles;
  
 public class SignUp {
     @NotBlank
@@ -20,7 +20,7 @@ public class SignUp {
     @Email
     private String phno;
     
-    private Set<User> role;
+    private Set<UserRoles> role;
     
     @Size(max=60, message="enter valid email")
     private String email;
@@ -53,11 +53,11 @@ public class SignUp {
 		this.phno = phno;
 	}
 
-	public Set<User> getRole() {
+	public Set<UserRoles> getRole() {
 		return role;
 	}
 
-	public void setRole(Set<User> role) {
+	public void setRole(Set<UserRoles> role) {
 		this.role = role;
 	}
 

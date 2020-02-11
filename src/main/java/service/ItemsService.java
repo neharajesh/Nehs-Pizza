@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entities.ItemsEntity;
+import entities.Items;
 import repositories.ItemsRepository;
 
 @Service
@@ -15,18 +15,18 @@ public class ItemsService {
 	private ItemsRepository itemsRepository;
 	
 	//find and return all items on the menu, with attributes
-	public List<ItemsEntity> findAllItems() {
+	public List<Items> findAllItems() {
 		return itemsRepository.findAll();
 	}
 	
 	//find items by id
-	public ItemsEntity findItemById(int id) {
-		Optional<ItemsEntity> item = itemsRepository.findById(id);
+	public Items findItemById(int id) {
+		Optional<Items> item = itemsRepository.findById(id);
 		return item.get();
 	}
 	
 	//add new items
-	public ItemsEntity addNewItem(ItemsEntity itemsEntity) {
+	public Items addNewItem(Items itemsEntity) {
 		return itemsRepository.save(itemsEntity);
 	}
 }

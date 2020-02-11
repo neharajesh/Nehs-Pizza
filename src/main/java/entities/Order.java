@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import enums.Status;
+import enums.StatusTypes;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,13 +23,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name="order")
-public class OrderEntity {
+public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private UserEntity customer;
-	private UserEntity staff;
-	private UserEntity delivery;
+	private User customer;
+	private User staff;
+	private User delivery;
 	private Date orderedDateTime;
 	private Date expectedDateTime;
 	private String extraInstructions;
@@ -37,10 +37,10 @@ public class OrderEntity {
 	private int flag;
 	
 	@OneToOne
-	private ItemsEntity itemId;
+	private Items itemId;
 	
 	@Enumerated(EnumType.STRING)
-	private Status status;
+	private StatusTypes status;
 
 	public int getId() {
 		return id;
@@ -50,27 +50,27 @@ public class OrderEntity {
 		this.id = id;
 	}
 
-	public UserEntity getCustomer() {
+	public User getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(UserEntity customer) {
+	public void setCustomer(User customer) {
 		this.customer = customer;
 	}
 
-	public UserEntity getStaff() {
+	public User getStaff() {
 		return staff;
 	}
 
-	public void setStaff(UserEntity staff) {
+	public void setStaff(User staff) {
 		this.staff = staff;
 	}
 
-	public UserEntity getDelivery() {
+	public User getDelivery() {
 		return delivery;
 	}
 
-	public void setDelivery(UserEntity delivery) {
+	public void setDelivery(User delivery) {
 		this.delivery = delivery;
 	}
 
@@ -98,11 +98,11 @@ public class OrderEntity {
 		this.extraInstructions = extraInstructions;
 	}
 
-	public Status getStatus() {
+	public StatusTypes getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(StatusTypes status) {
 		this.status = status;
 	}
 
@@ -114,11 +114,11 @@ public class OrderEntity {
 		this.flag = flag;
 	}
 
-	public ItemsEntity getItemId() {
+	public Items getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(ItemsEntity itemId) {
+	public void setItemId(Items itemId) {
 		this.itemId = itemId;
 	}
 	

@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import enums.User;
+import enums.UserRoles;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,11 +18,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name="address")
-public class AddressEntity {
+public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private User user;
+	private UserRoles user;
 	private String location;
 	public int getId() {
 		return id;
@@ -30,10 +30,10 @@ public class AddressEntity {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public User getUser() {
+	public UserRoles getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(UserRoles user) {
 		this.user = user;
 	}
 	public String getLocation() {

@@ -19,12 +19,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import entities.UserEntity;
-import enums.User;
+import entities.User;
+import enums.UserRoles;
+import entities.BuilderEntity;
 import entities.Roles;
 import http.request.Login;
 import http.request.SignUp;
 import http.response.JwtResponse;
+import lombok.Builder;
+import lombok.Lombok;
 import repositories.UserRepository;
 import repositories.RoleRepository;
 import security.jwt.JwtProvider;
@@ -79,42 +82,42 @@ public class AuthRestAPIs {
         }*/
  
         // Creating user's account
-        /*UserEntity user = UserEntity.builder()
-                .firstName(signUpRequest.getFirstName())
-                .lastName(signUpRequest.getLastName())
-                .phno(signUpRequest.getPhno())
-                .email(signUpRequest.getEmail())
-                .password(encoder.encode(signUpRequest.getPassword()))
-                .build();*/
+        User user = new User.Builder()
+                .setFirstName(signUpRequest.getFirstName())
+                .setLastName(signUpRequest.getLastName())
+                .setPhno(signUpRequest.getPhno())
+                .setEmail(signUpRequest.getEmail())
+                .setPassword(encoder.encode(signUpRequest.getPassword()))
+                .build();
         
-        UserEntity user = new UserEntity(signUpRequest.getFirstName(), signUpRequest.getLastName(),
-                signUpRequest.getPhno(),signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
+       /* User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(),
+                signUpRequest.getPhno(),signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));*/
  
-        Set<User> strRoles = signUpRequest.getRole();
+        Set<UserRoles> strRoles = signUpRequest.getRole();
         Set<Roles> roles = new HashSet<>();
  
         strRoles.forEach(role -> {
           switch(role) {
           case MANAGER:
-            Roles managerRole = roleRepository.findByName(User.MANAGER)
+            Roles managerRole = roleRepository.findByName(UserRoles.MANAGER)
                   .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Role not found."));
             roles.add(managerRole);
             
             break;
           case GENERAL:
-                Roles generalRole = roleRepository.findByName(User.GENERAL)
+                Roles generalRole = roleRepository.findByName(UserRoles.GENERAL)
                   .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Role not found."));
                 roles.add(generalRole);
                 
             break;
           case DELIVERY:
-              Roles deliveryRole = roleRepository.findByName(User.DELIVERY)
+              Roles deliveryRole = roleRepository.findByName(UserRoles.DELIVERY)
                 .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Role not found."));
               roles.add(deliveryRole);
               
           break;
           default:
-        	  Roles userRole = roleRepository.findByName(User.USER)
+        	  Roles userRole = roleRepository.findByName(UserRoles.USER)
                   .orElseThrow(() -> new RuntimeException("Fail! -> Cause: Role not found."));
               roles.add(userRole);              
           }

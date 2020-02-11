@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entities.UserEntity;
+import entities.User;
 import repositories.UserRepository;
 
 @Service
@@ -14,19 +14,19 @@ public class UserService {
 	private UserRepository userRepository;
 	
 	//find and return all user details
-	public List<UserEntity> findAllUserDetails() {
+	public List<User> findAllUserDetails() {
 		return userRepository.findAll();
 	}
 	
 	//find user details by email
-	public UserEntity findUserByEmail(String email) {
-		Optional<UserEntity> user = userRepository.findByEmail(email);
+	public User findUserByEmail(String email) {
+		Optional<User> user = userRepository.findByEmail(email);
 		return user.get();
 	}
 	
 	//find user by phone number
-	public UserEntity findUserByPhno(String phno) {
-		Optional<UserEntity> user = userRepository.findByPhno(phno);
+	public User findUserByPhno(String phno) {
+		Optional<User> user = userRepository.findByPhno(phno);
 		return user.get();
 	}
 	
@@ -41,7 +41,7 @@ public class UserService {
 		}
 	
 	//add new user
-	public UserEntity addNewUser(UserEntity userEntity) {
+	public User addNewUser(User userEntity) {
 		return userRepository.save(userEntity);
 	}
 }

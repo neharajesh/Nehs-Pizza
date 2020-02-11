@@ -1,5 +1,5 @@
 package enums;
 
-public enum User {
+public enum UserRoles {
 	MANAGER, GENERAL, DELIVERY, USER
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import entities.ItemsEntity;
+import entities.Items;
 import service.ItemsService;
 
 @RestController
@@ -18,19 +18,19 @@ public class ItemsController {
 	
 	//all items
 	@GetMapping("/items/all")
-	public List<ItemsEntity> all() {
+	public List<Items> all() {
 		return itemsService.findAllItems();
 	}
 	
 	//items by id
 	@GetMapping("/items/{id}")
-	public ItemsEntity byId(int id) {
+	public Items byId(int id) {
 		return itemsService.findItemById(id);
 	}
 	
 	//add new item
 	@PostMapping("/items/new")
-	public ItemsEntity newItem(@RequestBody ItemsEntity ie) {
+	public Items newItem(@RequestBody Items ie) {
 		return itemsService.addNewItem(ie);
 	}
 	

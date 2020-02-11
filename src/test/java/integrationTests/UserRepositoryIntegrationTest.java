@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import entities.UserEntity;
+import entities.User;
 import repositories.UserRepository;
 
 @RunWith(SpringRunner.class)
@@ -25,18 +25,18 @@ public class UserRepositoryIntegrationTest {
 
     @Test
     public void givenEmptyDBWhenFindByPhnoThenReturnEmptyOptional() {
-        Optional<UserEntity> foundUser = userRepository.findByPhno(USER_PHNO);
+        Optional<User> foundUser = userRepository.findByPhno(USER_PHNO);
 
         assertThat(foundUser.isPresent()).isEqualTo(false);
     }
 
     @Test
     public void givenUserInDBWhenFindByPhnoThenReturnOptionalWithUser() {
-        UserEntity user = new UserEntity();
+        User user = new User();
         user.setPhno(USER_PHNO);
         userRepository.save(user);
 
-        Optional<UserEntity> foundUser = userRepository.findByPhno(USER_PHNO);
+        Optional<User> foundUser = userRepository.findByPhno(USER_PHNO);
 
         assertThat(foundUser.isPresent()).isEqualTo(true);
 
@@ -47,18 +47,18 @@ public class UserRepositoryIntegrationTest {
     
     @Test
     public void givenEmptyDBWhenFindByEmailThenReturnEmptyOptional() {
-        Optional<UserEntity> foundUser = userRepository.findByEmail(USER_EMAIL);
+        Optional<User> foundUser = userRepository.findByEmail(USER_EMAIL);
 
         assertThat(foundUser.isPresent()).isEqualTo(false);
     }
 
     @Test
     public void givenUserInDBWhenFindByEmailThenReturnOptionalWithUser() {
-        UserEntity user = new UserEntity();
+        User user = new User();
         user.setEmail(USER_EMAIL);
         userRepository.save(user);
 
-        Optional<UserEntity> foundUser = userRepository.findByEmail(USER_EMAIL);
+        Optional<User> foundUser = userRepository.findByEmail(USER_EMAIL);
 
         assertThat(foundUser.isPresent()).isEqualTo(true);
 

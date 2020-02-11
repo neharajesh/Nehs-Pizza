@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import entities.UserEntity;
+import entities.User;
 
 public class UserPrinciple implements UserDetails {
 	  private static final long serialVersionUID = 1L;
@@ -54,7 +54,7 @@ public class UserPrinciple implements UserDetails {
 	        );
 	    }*/
 	    
-	    public static UserPrinciple build(UserEntity user) {
+	    public static UserPrinciple build(User user) {
 	    	List<GrantedAuthority> authorities = user.getRoles().stream().map(role -> 
 	    		new SimpleGrantedAuthority(role.getName().name())
 	    	).collect(Collectors.toList());

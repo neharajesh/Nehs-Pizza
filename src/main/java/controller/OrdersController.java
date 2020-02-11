@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import entities.OrderEntity;
+import entities.Order;
 import service.OrderService;
 
 @RestController
@@ -18,31 +18,31 @@ public class OrdersController {
 	
 	//to get all orders
 	@GetMapping("/orders")
-	List<OrderEntity> all () {
+	List<Order> all () {
 		return orderService.findAllOrders();
 	}
 	
 	//to get all live orders
 	@GetMapping("/orders/live")
-	public List<OrderEntity> live() {
+	public List<Order> live() {
 		return orderService.findLiveOrders();
 	}
 	
 	//to get all past orders
 	@GetMapping("/orders/past")
-	public List<OrderEntity> past() {
+	public List<Order> past() {
 		return orderService.findPastOrders();
 	}
 	
 	//find order by id
 	@GetMapping("/orders/{id}")
-	public OrderEntity findById(int id) {
+	public Order findById(int id) {
 		return orderService.findOrderById(id);
 	}
 	
 	//add new order
 	@PostMapping("/order/new")
-	public OrderEntity newOrder(@RequestBody OrderEntity newOrder) {
+	public Order newOrder(@RequestBody Order newOrder) {
 		return orderService.addNewOrder(newOrder);
 	}
 	

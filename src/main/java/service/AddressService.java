@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import entities.AddressEntity;
+import entities.Address;
 import repositories.AddressRepository;
 
 @Service
@@ -14,18 +14,18 @@ public class AddressService {
 	@Autowired
 	private AddressRepository addressRepository;
 
-	public List<AddressEntity> findAddress() {
+	public List<Address> findAddress() {
 		return addressRepository.findAll();
 	}
 	
 	//finding address by id
-	public AddressEntity findById(int id) {
-		Optional<AddressEntity> address =  addressRepository.findById(id);
+	public Address findById(int id) {
+		Optional<Address> address =  addressRepository.findById(id);
 		return address.get();
 	}
 	
 	//new address
-	public AddressEntity addNewAddress(AddressEntity addressEntity) {
+	public Address addNewAddress(Address addressEntity) {
 		return addressRepository.save(addressEntity);
 	}
 }

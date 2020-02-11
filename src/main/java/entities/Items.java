@@ -12,7 +12,7 @@ import enums.ItemAttributes;
 
 @Entity
 @Table(name="items")
-public class ItemsEntity {
+public class Items {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

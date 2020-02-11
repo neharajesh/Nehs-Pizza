@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import entities.UserEntity;
+import entities.User;
 import service.UserService;
 
 @RestController
@@ -20,7 +20,7 @@ public class UserController {
 	//get all user details
 	@GetMapping("/users")
 	@ModelAttribute("users")
-	public List<UserEntity> all() {
+	public List<User> all() {
 		return userService.findAllUserDetails();
 	}
 	
@@ -32,7 +32,7 @@ public class UserController {
 	
 	//add new user
 	@PostMapping("/users/new")
-	public UserEntity addNewUser(@RequestBody UserEntity newUser) {
+	public User addNewUser(@RequestBody User newUser) {
 		return userService.addNewUser(newUser);
 	}
 	
