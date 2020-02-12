@@ -3,9 +3,10 @@ package controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,16 +20,29 @@ public class UserController {
 	
 	//get all user details
 	@GetMapping("/users")
-	@ModelAttribute("users")
-	public List<User> all() {
+	@PreAuthorize("hasRole('MANAGER')")
+	public List<User> all(Model model) {
+		model.addAttribute("users", userService.findAllUserDetails());
 		return userService.findAllUserDetails();
 	}
 	
-	//get user details by id
-	/*@GetMapping("/users/{id}")
-	public User getDetails(@PathVariable int id) {
-		return userService.findUserById(id);
-	}*/
+	//get user details by phno
+	@GetMapping("/users/{phno}")
+	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
+	public User getDetailsByPhno(@PathVariable String phno, Model model) {
+		User user = userService.findUserByPhno(phno);
+		model.addAttribute("user", user);
+		return user;
+	}
+	
+	//get user details by email
+		@GetMapping("/users/{email}")
+		@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
+		public User getDetailsByEmail(@PathVariable String email, Model model) {
+			User user = userService.findUserByEmail(email);
+			model.addAttribute("user", user);
+			return user;
+		}
 	
 	//add new user
 	/*@PostMapping("/users/new")

@@ -52,6 +52,12 @@ public class OrderService {
 	//add order
 	public Order addNewOrder(Order orderEntity) {
 		return orderRepository.save(orderEntity);
-
 	}
+	
+	//cancel or delete order
+	public void cancelOrder(Order order) {
+		orderRepository.delete(order);
+	}
+	
+	
 }

@@ -29,4 +29,20 @@ public class ItemsService {
 	public Items addNewItem(Items itemsEntity) {
 		return itemsRepository.save(itemsEntity);
 	}
+	
+	//remove item
+	public void deleteItem(Items item) {
+		itemsRepository.delete(item);
+	}
+	
+	//update item
+	public Items updateItem(Items item) {
+		return itemsRepository.save(item);
+	}
+	
+	//find item by name
+	public Items findByItemName(String name) {
+		Optional<Items> item = itemsRepository.findByName(name);
+		return item.get();
+	}
 }

@@ -2,11 +2,12 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<h1>Sign Up</h1>
-    <form action="#" th:action="@{/signup}" th:object="${signup}" method="post">
+    <form action="#" th:action="@{/signup}" th:object="${signUpRequest}" method="post">
     	<p>First Name: <input type="text" th:field="*{firstName}" /></p>
         <p>Last Name: <input type="text" th:field="*{lastName}" /></p>
         <p>Phone Number: <input type="text" th:field="*{phno}" /></p>

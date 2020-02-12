@@ -2,6 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>User Details</title>
+    <link rel="stylesheet" href="style.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -21,12 +22,12 @@
     <tr th:if="${users.empty}">
             <td colspan="2"> No Data Available </td>
         </tr>
-        <tr th:each="UserEntity : ${users}">
-            <td><span th:text="${users.id}"> Id </span></td>
-            <td><span th:text="$users.firstName}"> First Name </span></td>
-            <td><span th:text="$users.lastName}"> Last Name </span></td>
-            <td><span th:text="$users.email}"> Email </span></td>
-            <td><span th:text="$users.phno}"> Phone Number </span></td>
+        <tr th:each="user : ${users}">
+            <td><span th:text="${user.id}"> Id </span></td>
+            <td><span th:text="$user.firstName}"> First Name </span></td>
+            <td><span th:text="$user.lastName}"> Last Name </span></td>
+            <td><span th:text="$user.email}"> Email </span></td>
+            <td><span th:text="$user.phno}"> Phone Number </span></td>
         </tr>
     </tbody>
 </table>
