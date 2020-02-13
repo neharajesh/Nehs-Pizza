@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Item Details</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1>Neh's Pizza</h1>
+    
+    <h2>Menu</h2>
+    
+    <div th:if="${not #lists.isEmpty(itemlist)}">
+	<table>
+    <thead>
+        <tr>
+            <th> Id </th>
+            <th> Name </th>
+            <th> Size </th>
+            <th> Price </th>
+        </tr>
+    </thead>
+
+    <tbody>
+    
+    <tr th:each="item : ${itemlist}">
+        <td><span th:text="${item.id}"></span></td>
+        <td><span th:text="${item.name}"></span></td>
+        <td><span th:text="${item.size}"></span></td>
+        <td><span th:text="${item.price}"></span></td>
+    </tr>
+    </tbody>
+</table>
+	    </div>
+	
+</body>
+</html>

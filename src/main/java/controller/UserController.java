@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,18 +24,15 @@ public class UserController {
 	@Autowired
 	private RoleService roleService;
 	
-	/*@Autowired
-	private */
-	
 	//get all user details
 	@GetMapping("/users")
 	@PreAuthorize("hasRole('MANAGER')")
-	public List<User> all(
-			/*@RequestParam*/
-			Model model) {
+	public String all(
+					/*@RequestBody User user, */
+					Model model) {
 		List<User> allUsers = userService.findAllUserDetails();
 		model.addAttribute("users", allUsers);
-		return allUsers;
+		return "users";
 	}
 	
 	//get user details by phno
@@ -75,6 +73,7 @@ public class UserController {
 		userService.deleteUser(exsitingUser);
 	}
 	
+	@PostMapping("/users/update/{id}")
 	//update user details
 	public User updateUserDetails(@RequestBody User updatingUser) {
 		return userService.updateUser(updatingUser);

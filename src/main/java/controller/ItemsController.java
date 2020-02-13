@@ -19,10 +19,12 @@ public class ItemsController {
 	private ItemsService itemsService;
 	
 	//all items
-	@GetMapping("allitems")
+	@PostMapping("/items")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public List<Items> all() {
-		return itemsService.findAllItems();
+	public String all(Model model) {
+		List<Items> item = itemsService.findAllItems();
+		model.addAttribute("itemlist", item);
+		return "items";
 	}
 	
 	//items by id
