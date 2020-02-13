@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,29 +22,37 @@ public class OrdersController {
 	//to get all orders
 	@GetMapping("/orders")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	List<Order> all () {
-		return orderService.findAllOrders();
+	public String all (Model model) {
+		List<Order> orders = orderService.findAllOrders();
+		model.addAttribute("orders", orders);
+		return "allorders";
 	}
 	
 	//to get all live orders
-	@GetMapping("/liveorders")
+	@GetMapping("/orders/live")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL') or hasRole('DELIVERY')")
-	public List<Order> live() {
-		return orderService.findLiveOrders();
+	public String live(Model model) {
+		List<Order> liveorders = orderService.findLiveOrders();
+		model.addAttribute("liveorders", liveorders);
+		return "liveorders";
 	}
 	
 	//to get all past orders
-	@GetMapping("/pastorders")
+	@GetMapping("/orders/past")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public List<Order> past() {
-		return orderService.findPastOrders();
+	public String past(Model model) {
+		List<Order> pastorders = orderService.findPastOrders();
+		model.addAttribute("pastorders", pastorders);
+		return "pastorders";
 	}
 	
 	//find order by id
-	@GetMapping("/ordersbyid")
+	@GetMapping("/orders/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public Order findById(int id) {
-		return orderService.findOrderById(id);
+	public String findById(@PathVariable int id, Model model) {
+		Order order = orderService.findOrderById(id);
+		model.addAttribute("order", order);
+		return "orderbyid";
 	}
 	
 	//add new order

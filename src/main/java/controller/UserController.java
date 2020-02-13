@@ -38,19 +38,27 @@ public class UserController {
 	//get user details by phno
 	@GetMapping("/users/{phno}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
-	public User getDetailsByPhno(@PathVariable String phno, Model model) {
+	public String getDetailsByPhno(@PathVariable String phno, Model model) {
+		/*User user = null;
+		try {
+			user =  userService.findUserByPhno(phno);
+		} catch(ResourceNotFoundException e){
+			model.addAttribute("errorMessage", "Contact not found");
+		}
+		model.addAttribute("user", user);
+		return "user";*/
 		User user = userService.findUserByPhno(phno);
 		model.addAttribute("user", user);
-		return user;
+		return "user";
 	}
 	
 	//get user details by email
 	@GetMapping("/users/{email}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
-	public User getDetailsByEmail(@PathVariable String email, Model model) {
+	public String getDetailsByEmail(@PathVariable String email, Model model) {
 		User user = userService.findUserByEmail(email);
 		model.addAttribute("user", user);
-		return user;
+		return "user";
 	}
 		
 	//get users based on role

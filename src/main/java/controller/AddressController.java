@@ -3,8 +3,10 @@ package controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,20 +21,26 @@ public class AddressController {
 	
 	//find all addresses
 	@GetMapping("/address/all")
-	public List<Address> all() {
-		return addressService.findAddress();
+	public String all(Model model) {
+		List<Address> addressList = addressService.findAddress();
+		model.addAttribute("addressList", addressList);
+		return "alladdresses";
 	}
 	
 	//find address by id
 	@GetMapping("/address/{id}")
-	public Address findById(int id) {
-		return addressService.findById(id);
+	public String findById(@PathVariable int id, Model model) {
+		Address address = addressService.findById(id);
+		model.addAttribute("address", address);
+		return "addressById";
 	}
 	
 	//find address by user id
-	@ModelAttribute("useraddress")
-	public Address findByUser(int id) {
-		return addressService.findByUserID(id);
+	@ModelAttribute("address/{userId}")
+	public String findByUser(@PathVariable int userId, Model model) {
+		Address address = addressService.findByUserID(userId);
+		model.addAttribute("address", address);
+		return "addressByUserId";
 	}
 	
 	//add new address 

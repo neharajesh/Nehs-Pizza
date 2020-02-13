@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,15 +31,19 @@ public class ItemsController {
 	//items by id
 	@GetMapping("/items/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public Items byId(int id) {
-		return itemsService.findItemById(id);
+	public String byId(@PathVariable int id, Model model) {
+		Items item =  itemsService.findItemById(id);
+		model.addAttribute("item", item);
+		return "itembyid";
 	}
 	
 	//add new item
 	@PostMapping("/items/new")
 	@PreAuthorize("hasRole('MANAGER')")
-	public Items newItem(@RequestBody Items item) {
-		return itemsService.addNewItem(item);
+	public String newItem(@RequestBody Items item, Model model) {
+		//Items item = itemsService.addNewItem(item);
+		model.addAttribute("item", item);
+		return "addnewitem";
 	}
 	
 	//remove an item
