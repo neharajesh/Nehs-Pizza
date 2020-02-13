@@ -60,7 +60,6 @@ input[type=button], input[type=submit], input[type=reset] {
   text-decoration: none;
   margin: 0 auto;
   cursor: pointer;
-  align: center;
   float: right;
 }
 

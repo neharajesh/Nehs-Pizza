@@ -1,9 +1,9 @@
 service\UserService$1.class
 security\WebSecurityConfig.class
-NehsPizzaApplication.class
 http\request\Login.class
 controller\UserController.class
 service\UserService.class
+mainapp\NehsPizzaApplication.class
 controller\AddressController.class
 entities\Roles.class
 repositories\AddressRepository.class
