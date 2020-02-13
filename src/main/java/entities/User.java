@@ -15,6 +15,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+/*import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;*/
 
 import enums.UserRoles;
 
@@ -24,11 +27,26 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+/*	@NotBlank
+    @Size(min = 3, max = 50)*/
 	private String firstName;
+	
+/*	@NotBlank
+    @Size(min = 3, max = 50)*/
 	private String lastName;
-	private String password;
+	
+/*	@NotBlank
+	@Email*/
 	private String email;
+	
+/*	@NotBlank
+    @Size(max = 60, message="enter 10 digit phone number")*/
 	private String phno;
+	
+/*    @NotBlank
+    @Size(min = 6, max = 40, message="enter a valid password")*/
+	private String password;
 	
 	@OneToMany
 	private Address addressId;

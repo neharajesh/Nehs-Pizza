@@ -2,29 +2,30 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Sign Up</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Sign Up</h1>
+	<h1> Neh's Pizza </h1>    
+
+    <h2>Sign Up</h2>
+
     <form action="#" th:action="@{/signup}" th:object="${signUpRequest}" method="post">
     	<p>First Name: <input type="text" th:field="*{firstName}" /></p>
         <p>Last Name: <input type="text" th:field="*{lastName}" /></p>
         <p>Phone Number: <input type="text" th:field="*{phno}" /></p>
-        <p>Role: <input type="checkbox" th:field="*{role}" /></p>
-        
-        
-        <!-- <select th:field="*{role}">
-		  <option 
-		      th:each="dropdownValue: ${singleSelectAllValues}"
-		      th:value="${dropdownValue}"
-		      th:text="${dropdownValue}" ></option>
-		</select> -->
-		
-		<p>Email: <input type="email" th:field="*{email}" /></p>
+        <p>Role: <select th:field="*{role}">
+        			<option>Select Type of ID</option>
+        			<option th:value="MANAGER" th:text="Manager">Manager</option>
+        			<option th:value="GENERAL" th:text="General">General</option>
+        			<option th:value="DELIVERY" th:text="Delivery">Delivery</option>
+        			<option th:value="USER" th:text="User">User</option>
+        		</select>       
+        </p>        
+ 		<p>Email: <input type="email" th:field="*{email}" /></p>
         <p>Password: <input type="password" th:field="*{password}" /></p>
         
-        <p><input type="submit" value="Submit" />
+        <p><input type="submit" value="Submit" /> 
          <input type="reset" value="Reset" />	</p>
     </form>
 </body>

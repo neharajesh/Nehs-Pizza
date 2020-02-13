@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import http.request.Login;
@@ -30,6 +31,12 @@ public class LoginController {
 	 
 	 @Autowired
 	 private UserService userService;
+	 
+	 @RequestMapping("/")
+	 public String index() {
+		 return "Welcome to Neh's Pizza!";
+	 }
+	 
 	
 	@PostMapping("/signin")
 	    public ResponseEntity<?> authenticateUser(@Valid @RequestBody Login loginRequest) {
@@ -53,9 +60,15 @@ public class LoginController {
         if(userService.checkByPhno(signUpRequest.getPhno())) {
             return new ResponseEntity<String>("Fail -> Username is already taken!", HttpStatus.BAD_REQUEST);
         }
+        else if(userService.checkByEmail(signUpRequest.getEmail())) {
+        	return new ResponseEntity<String>("Fail -> Username is already taken!", HttpStatus.BAD_REQUEST);
+        }
         else{
         	userService.addNewUser(signUpRequest);
         	return new ResponseEntity<String>("User registered successfully!", HttpStatus.OK);
         }
 	}
+	
+	//after login, go to user/usertype specific page
+	/*@RequestMapping*/
 }

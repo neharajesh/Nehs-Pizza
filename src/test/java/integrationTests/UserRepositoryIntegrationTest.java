@@ -1,4 +1,4 @@
-package integrationTests;
+/*package integrationTests;
 
 import java.util.Optional;
 
@@ -67,7 +67,7 @@ public class UserRepositoryIntegrationTest {
           .getEmail()).isEqualTo(USER_EMAIL);
     }
 
-    /*@Test
+    @Test
     public void givenUserInDBWhenFindOneByStatusAsyncThenReturnCompletableFutureUser() throws ExecutionException, InterruptedException {
         User user = new User();
         user.setName(USER_NAME_ADAM);
@@ -79,7 +79,7 @@ public class UserRepositoryIntegrationTest {
         assertThat(userByStatus
           .get()
           .getName()).isEqualTo(USER_NAME_ADAM);
-    }*/
+    }
 
     @After
     public void cleanUp() {
@@ -87,3 +87,4 @@ public class UserRepositoryIntegrationTest {
     }
 
 }
+*/

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import entities.User;
+import enums.UserRoles;
+import service.RoleService;
 import service.UserService;
 
 @RestController
@@ -18,12 +20,21 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private RoleService roleService;
+	
+	/*@Autowired
+	private */
+	
 	//get all user details
 	@GetMapping("/users")
 	@PreAuthorize("hasRole('MANAGER')")
-	public List<User> all(Model model) {
-		model.addAttribute("users", userService.findAllUserDetails());
-		return userService.findAllUserDetails();
+	public List<User> all(
+			/*@RequestParam*/
+			Model model) {
+		List<User> allUsers = userService.findAllUserDetails();
+		model.addAttribute("users", allUsers);
+		return allUsers;
 	}
 	
 	//get user details by phno
@@ -36,13 +47,22 @@ public class UserController {
 	}
 	
 	//get user details by email
-		@GetMapping("/users/{email}")
-		@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
-		public User getDetailsByEmail(@PathVariable String email, Model model) {
-			User user = userService.findUserByEmail(email);
-			model.addAttribute("user", user);
-			return user;
-		}
+	@GetMapping("/users/{email}")
+	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
+	public User getDetailsByEmail(@PathVariable String email, Model model) {
+		User user = userService.findUserByEmail(email);
+		model.addAttribute("user", user);
+		return user;
+	}
+		
+	//get users based on role
+	@GetMapping("/users/{usertype}")
+	@PreAuthorize("hasRole('MANAGER')")
+	public List<User> findUsersBasedOnRole(@PathVariable UserRoles roleName, Model model) {
+		List<User> listOfUsers = roleService.findUsersBasedOnRole(roleName);
+		model.addAttribute("user", listOfUsers);
+		return listOfUsers;
+	}
 	
 	//add new user
 	/*@PostMapping("/users/new")

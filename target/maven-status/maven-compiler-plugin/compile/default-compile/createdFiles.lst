@@ -1,3 +1,4 @@
+service\UserService$1.class
 security\WebSecurityConfig.class
 NehsPizzaApplication.class
 http\request\Login.class
@@ -17,7 +18,6 @@ security\jwt\JwtAuthTokenFilter.class
 entities\User.class
 controller\ItemsController.class
 entities\Status.class
-controller\AuthRestAPIs.class
 repositories\UserRepository.class
 entities\Items.class
 enums\StatusTypes.class
@@ -28,7 +28,6 @@ service\ItemsService.class
 security\jwt\JwtAuthEntryPoint.class
 entities\User$Builder.class
 http\request\SignUp.class
-controller\AuthRestAPIs$1.class
 repositories\ItemsRepository.class
 enums\ItemAttributes.class
 service\AddressService.class
@@ -36,3 +35,4 @@ entities\Address.class
 controller\OrdersController.class
 entities\Order.class
 controller\TestRestAPIs.class
+service\RoleService.class

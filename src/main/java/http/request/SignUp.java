@@ -17,7 +17,6 @@ public class SignUp {
  
     @NotBlank
     @Size(max = 60, message="enter 10 digit phone number")
-    @Email
     private String phno;
     
     private Set<UserRoles> role;
