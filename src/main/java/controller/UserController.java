@@ -33,13 +33,13 @@ public class UserController {
 					Model model) {
 		List<User> allUsers = userService.findAllUserDetails();
 		model.addAttribute("users", allUsers);
-		return "users";
+		return "usersAll";
 	}
 	
 	//get user details by phno
 	@GetMapping("/users/{phno}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
-	public String getDetailsByPhno(@RequestParam String phno, Model model) {
+	public String getDetailsByPhno(@RequestParam("phno") String phno, Model model) {
 		User user = userService.findUserByPhno(phno);
 		model.addAttribute("user", user);
 		return "userByPhno";
@@ -48,10 +48,10 @@ public class UserController {
 	//get user details by email
 	@GetMapping("/users/{email}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
-	public String getDetailsByEmail(@RequestParam String email, Model model) {
+	public String getDetailsByEmail(@RequestParam("email") String email, Model model) {
 		User user = userService.findUserByEmail(email);
 		model.addAttribute("user", user);
-		return "user";
+		return "userByEmail";
 	}
 		
 	//get users based on role
@@ -79,7 +79,7 @@ public class UserController {
 	public String updateUserDetails(@RequestParam User updatingUser, Model model) {
 		User updated = userService.updateUser(updatingUser);
 		model.addAttribute("updated", updated);
-		return "updatedUser";
+		return "userUpdate";
 		
 		//or return find item by id page by passing this id 
 	}

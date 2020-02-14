@@ -1,1 +1,23 @@
-displays address of user searched by user id
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Sign In</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1> Neh's Pizza </h1>    
+
+    <h2>Search Address Details</h2>
+   
+    <form action="#" th:action="@{/address/{userId}}" th:object="${address}" method="post">
+        <p>Phone Number: <input type="number" th:field="*{userId}" placeholder="Enter user id to search" /></p>
+        <p><input type="submit" value="Search Address" />	</p>
+	</form>
+	
+	<!-- here, code to display the address details -->
+
+</body>
+
+</html>

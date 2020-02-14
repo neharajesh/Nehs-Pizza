@@ -11,12 +11,12 @@
 
     <h2>Search Address Details</h2>
    
-    <form action="#" th:action="@{/address/{id}}" th:object="${address}" method="post">
+    <form action="#" th:action="@{/orders/{id}}" th:object="${order}" method="post">
         <p>Phone Number: <input type="number" th:field="*{id}" placeholder="Enter id to search" /></p>
-        <p><input type="submit" value="Search Address" />	</p>
+        <p><input type="submit" value="Search Order" />	</p>
 	</form>
 	
-	<!-- here, code to display the address details -->
+	<!-- here, code to display the order details -->
 
 </body>
 

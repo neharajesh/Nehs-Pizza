@@ -25,12 +25,12 @@ public class AddressController {
 	public String all(Model model) {
 		List<Address> addressList = addressService.findAddress();
 		model.addAttribute("addressList", addressList);
-		return "alladdresses";
+		return "addressAll";
 	}
 	
 	//find address by id
 	@GetMapping("/address/{id}")
-	public String findById(@RequestParam int id, Model model) {
+	public String findById(@RequestParam("id") int id, Model model) {
 		Address address = addressService.findById(id);
 		model.addAttribute("address", address);
 		return "addressById";
@@ -38,7 +38,7 @@ public class AddressController {
 	
 	//find address by user id
 	@ModelAttribute("address/{userId}")
-	public String findByUser(@RequestParam int userId, Model model) {
+	public String findByUser(@RequestParam("userId") int userId, Model model) {
 		Address address = addressService.findByUserID(userId);
 		model.addAttribute("address", address);
 		return "addressByUserId";

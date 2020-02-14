@@ -1,6 +1,31 @@
-create a input type text field to get phno 
+<!-- create a input type text field to get phno 
 pass that phno to the controller
 obtain result from the controller
 	if there is no user with that phno, display message saying "no user found"
 	if user is found, display the details of the user.
-		also have 2 buttons for edit and delete - to be able to edit or delete user details
+		also have 2 buttons for edit and delete - to be able to edit or delete user details -->
+
+
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Sign In</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1> Neh's Pizza </h1>    
+
+    <h2>Search User Details</h2>
+   
+    <form action="#" th:action="@{/users/{phno}}" th:object="${user}" method="post">
+        <p>Phone Number: <input type="text" th:field="*{phno}" placeholder="Enter phone number to search" /></p>
+        <p><input type="submit" value="Search User" />	</p>
+	</form>
+	
+	<!-- here, code to display the user details -->
+
+</body>
+
+</html>

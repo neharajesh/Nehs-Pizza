@@ -1,0 +1,32 @@
+<!-- create input type text field for getting user id
+send that id to controller
+get result from controller
+	if user is found, display details and add edit and delete buttons 
+	if no user is found, display "no user is found"
+
+
+change id to email. -->
+
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Sign In</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1> Neh's Pizza </h1>    
+
+    <h2>Search User Details</h2>
+   
+    <form action="#" th:action="@{/users/{email}}" th:object="${user}" method="post">
+        <p>Phone Number: <input type="text" th:field="*{email}" placeholder="Enter email to search" /></p>
+        <p><input type="submit" value="Search User" />	</p>
+	</form>
+	
+	<!-- here, code to display the user details -->
+
+</body>
+
+</html>

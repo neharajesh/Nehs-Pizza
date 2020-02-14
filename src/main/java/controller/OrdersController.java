@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,7 @@ public class OrdersController {
 	public String all (Model model) {
 		List<Order> orders = orderService.findAllOrders();
 		model.addAttribute("orders", orders);
-		return "allorders";
+		return "ordersAll";
 	}
 	
 	//to get all live orders
@@ -35,7 +34,7 @@ public class OrdersController {
 	public String live(Model model) {
 		List<Order> liveorders = orderService.findLiveOrders();
 		model.addAttribute("liveorders", liveorders);
-		return "liveorders";
+		return "ordersLive";
 	}
 	
 	//to get all past orders
@@ -44,13 +43,13 @@ public class OrdersController {
 	public String past(Model model) {
 		List<Order> pastorders = orderService.findPastOrders();
 		model.addAttribute("pastorders", pastorders);
-		return "pastorders";
+		return "ordersPast";
 	}
 	
 	//find order by id
 	@GetMapping("/orders/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public String findById(@RequestParam int id, Model model) {
+	public String findById(@RequestParam("id") int id, Model model) {
 		Order order = orderService.findOrderById(id);
 		model.addAttribute("order", order);
 		return "orderbyid";
@@ -62,5 +61,7 @@ public class OrdersController {
 	public Order newOrder(@RequestBody Order newOrder) {
 		return orderService.addNewOrder(newOrder);
 	}
+	
+	//add update order
 	
 }
