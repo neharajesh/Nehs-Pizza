@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import entities.Items;
+import entities.User;
 import service.ItemsService;
 
 @RestController
@@ -48,15 +49,27 @@ public class ItemsController {
 	
 	//remove an item
 	@PreAuthorize("hasRole('MANAGER')")
+	@PostMapping("/items/delete/{id}")
 	public void deleteItem(@RequestBody Items item) {
 		itemsService.deleteItem(item);
 	}
 	
 	//find item by name
+	@PostMapping("/items/{name}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public Items findByName(@RequestBody String name, Model model) {
 		Items item = itemsService.findByItemName(name);
 		model.addAttribute("result", item);
 		return item;
+	}
+	
+	//update item
+	@PostMapping("/items/update/{id}")
+	public String updateItemDetails(@RequestBody Items updatingItem, Model model) {
+		Items updated = itemsService.updateItem(updatingItem);
+		model.addAttribute("updated", updated);
+		return "updatedItem";
+		
+		//or return find item by id page by passing this id 
 	}
 }

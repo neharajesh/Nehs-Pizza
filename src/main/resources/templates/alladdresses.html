@@ -1,1 +1,36 @@
-displays all addresses in db
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Item Details</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1>Neh's Pizza</h1>
+    
+    <h2>All Address</h2>
+    
+    <div th:if="${not #lists.isEmpty(addressList)}">
+	<table>
+    <thead>
+        <tr>
+            <th> Id </th>
+            <th> Name </th>
+            <th> Location </th>
+        </tr>
+    </thead>
+
+    <tbody>
+    
+    <tr th:each="address : ${addressList}">
+        <td><span th:text="${address.id}"></span></td>
+        <td><span th:text="${address.user.name}"></span></td>
+        <td><span th:text="${address.location}"></span></td>
+    </tr>
+    </tbody>
+</table>
+	    </div>
+	
+</body>
+</html>

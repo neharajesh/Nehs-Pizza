@@ -81,10 +81,14 @@ public class UserController {
 		userService.deleteUser(exsitingUser);
 	}
 	
-	@PostMapping("/users/update/{id}")
 	//update user details
-	public User updateUserDetails(@RequestBody User updatingUser) {
-		return userService.updateUser(updatingUser);
+	@PostMapping("/users/update/{id}")
+	public String updateUserDetails(@RequestBody User updatingUser, Model model) {
+		User updated = userService.updateUser(updatingUser);
+		model.addAttribute("updated", updated);
+		return "updatedUser";
+		
+		//or return find item by id page by passing this id 
 	}
 	
 }

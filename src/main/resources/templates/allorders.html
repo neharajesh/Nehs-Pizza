@@ -1,1 +1,46 @@
-returns all orders 
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Item Details</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1>Neh's Pizza</h1>
+    
+    <h2>All Orders</h2>
+    
+    <div th:if="${not #lists.isEmpty(orders)}">
+	<table>
+    <thead>
+        <tr>
+            <th> Id </th>
+            <th> Customer Name </th>
+            <th> Staff Name </th>
+			<th> Delivery Agent </th>
+			<th> Ordered Date/Time </th>
+			<th> Expected Date/Time </th>
+			<th> Extra Instructions </th>
+			<th> Order Status </th>
+        </tr>
+    </thead>
+
+    <tbody>
+    
+    <tr th:each="order : ${orders}">
+        <td><span th:text="${order.id}"></span></td>
+        <td><span th:text="${order.customer}"></span></td>
+        <td><span th:text="${order.staff}"></span></td>
+		<td><span th:text="${order.delivery}"></span></td>
+		<td><span th:text="${order.orderedDateTime}"></span></td>
+		<td><span th:text="${order.expectedDateTime}"></span></td>
+		<td><span th:text="${order.instructions}"></span></td>
+		<td><span th:text="${order.status}"></span></td>
+    </tr>
+    </tbody>
+</table>
+	    </div>
+	
+</body>
+</html>

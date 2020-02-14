@@ -25,7 +25,7 @@ public class Order {
 	private Date orderedDateTime;
 	private Date expectedDateTime;
 	private String extraInstructions;
-	//private StatusType status; 		change this later
+	//private StatusType status; 		//change this later
 	private int flag;
 	
 	@OneToOne
@@ -104,7 +104,7 @@ public class Order {
 
 	public void setFlag(int flag) {
 		this.flag = flag;
-	}
+	}	
 
 	public Items getItemId() {
 		return itemId;
