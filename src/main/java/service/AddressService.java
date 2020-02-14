@@ -31,7 +31,16 @@ public class AddressService {
 	}
 	
 	//new address
-	public Address addNewAddress(Address addressEntity) {
-		return addressRepository.save(addressEntity);
+	public Address addOrUpdateAddress(Address addressEntity) {
+		Optional<Address> address = addressRepository.findById(addressEntity.getId());
+		if(address.isPresent()) {
+			Address updatedAddress = address.get();
+			updatedAddress.setUser(addressEntity.getUser());
+			updatedAddress.setLocation(addressEntity.getLocation());
+			
+			return addressRepository.save(updatedAddress);
+		}
+		else 
+			return addressRepository.save(addressEntity);
 	}
 }

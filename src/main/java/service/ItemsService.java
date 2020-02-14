@@ -26,18 +26,22 @@ public class ItemsService {
 	}
 	
 	//add new items
-	public Items addNewItem(Items itemsEntity) {
-		return itemsRepository.save(itemsEntity);
+	public Items addOrUpdateItem(Items itemsEntity) {
+		Optional<Items> items = itemsRepository.findById(itemsEntity.getId());
+		if(items.isPresent()) {
+			Items updatedItems = items.get();
+			updatedItems.setItemAttributes(itemsEntity.getItemAttributes());
+			updatedItems.setName(itemsEntity.getName());
+			
+			return itemsRepository.save(updatedItems);
+		}
+		else 
+			return itemsRepository.save(itemsEntity);
 	}
 	
 	//remove item
 	public void deleteItem(Items item) {
 		itemsRepository.delete(item);
-	}
-	
-	//update item
-	public Items updateItem(Items item) {
-		return itemsRepository.save(item);
 	}
 	
 	//find item by name

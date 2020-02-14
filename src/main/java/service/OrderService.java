@@ -50,8 +50,24 @@ public class OrderService {
 	}
 	
 	//add order
-	public Order addNewOrder(Order orderEntity) {
-		return orderRepository.save(orderEntity);
+	public Order addOrUpdateOrder(Order orderEntity) {
+		Optional<Order> order = orderRepository.findById(orderEntity.getId());
+		if(order.isPresent()) {
+			Order updatedOrder = order.get();
+			updatedOrder.setCustomer(orderEntity.getCustomer());
+			updatedOrder.setDelivery(orderEntity.getDelivery());
+			updatedOrder.setExpectedDateTime(orderEntity.getExpectedDateTime());
+			updatedOrder.setExtraInstructions(orderEntity.getExtraInstructions());
+			updatedOrder.setFlag(orderEntity.getFlag());
+			updatedOrder.setItemId(orderEntity.getItemId());
+			updatedOrder.setOrderedDateTime(orderEntity.getOrderedDateTime());
+			updatedOrder.setStaff(orderEntity.getStaff());
+			updatedOrder.setStatus(orderEntity.getStatus());
+			
+			return orderRepository.save(updatedOrder);
+		}
+		else
+			return orderRepository.save(orderEntity);
 	}
 	
 	//cancel or delete order

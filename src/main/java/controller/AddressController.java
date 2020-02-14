@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import entities.Address;
+import exceptions.RecordNotFoundException;
 import service.AddressService;
 
 @RestController
@@ -30,7 +30,7 @@ public class AddressController {
 	
 	//find address by id
 	@GetMapping("/address/{id}")
-	public String findById(@RequestParam("id") int id, Model model) {
+	public String findById(@RequestParam("id") int id, Model model) throws RecordNotFoundException{
 		Address address = addressService.findById(id);
 		model.addAttribute("address", address);
 		return "addressById";
@@ -38,7 +38,7 @@ public class AddressController {
 	
 	//find address by user id
 	@ModelAttribute("address/{userId}")
-	public String findByUser(@RequestParam("userId") int userId, Model model) {
+	public String findByUser(@RequestParam("userId") int userId, Model model) throws RecordNotFoundException{
 		Address address = addressService.findByUserID(userId);
 		model.addAttribute("address", address);
 		return "addressByUserId";
@@ -46,7 +46,7 @@ public class AddressController {
 	
 	//add new address 
 	@PostMapping("/address/new")
-	public Address addNewAddress(@RequestBody Address ae) {
-		return addressService.addNewAddress(ae);
+	public Address addNewAddress(@RequestBody Address addressEntity) throws RecordNotFoundException{
+		return addressService.addOrUpdateAddress(addressEntity);
 	}
 }

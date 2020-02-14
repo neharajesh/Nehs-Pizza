@@ -6,14 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import entities.Items;
-import entities.User;
+import exceptions.RecordNotFoundException;
 import service.ItemsService;
 
 @RestController
@@ -33,7 +32,7 @@ public class ItemsController {
 	//items by id
 	@GetMapping("/items/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public String byId(@RequestParam int id, Model model) {
+	public String byId(@RequestParam int id, Model model) throws RecordNotFoundException{
 		Items item =  itemsService.findItemById(id);
 		model.addAttribute("item", item);
 		return "itembyid";
@@ -42,7 +41,7 @@ public class ItemsController {
 	//add new item
 	@PostMapping("/items/new")
 	@PreAuthorize("hasRole('MANAGER')")
-	public String newItem(@RequestBody Items item, Model model) {
+	public String newItem(@RequestBody Items item, Model model) throws RecordNotFoundException{
 		//Items item = itemsService.addNewItem(item);
 		model.addAttribute("item", item);
 		return "addnewitem";
@@ -51,14 +50,14 @@ public class ItemsController {
 	//remove an item
 	@PreAuthorize("hasRole('MANAGER')")
 	@PostMapping("/items/delete/{id}")
-	public void deleteItem(@RequestBody Items item) {
+	public void deleteItem(@RequestBody Items item) throws RecordNotFoundException{
 		itemsService.deleteItem(item);
 	}
 	
 	//find item by name
 	@PostMapping("/items/{name}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public Items findByName(@RequestParam String name, Model model) {
+	public Items findByName(@RequestParam String name, Model model)throws RecordNotFoundException{
 		Items item = itemsService.findByItemName(name);
 		model.addAttribute("result", item);
 		return item;
@@ -66,8 +65,8 @@ public class ItemsController {
 	
 	//update item
 	@PostMapping("/items/update/{id}")
-	public String updateItemDetails(@RequestBody Items updatingItem, Model model) {
-		Items updated = itemsService.updateItem(updatingItem);
+	public String updateItemDetails(@RequestBody Items updatingItem, Model model) throws RecordNotFoundException{
+		Items updated = itemsService.addOrUpdateItem(updatingItem);
 		model.addAttribute("updated", updated);
 		return "updatedItem";
 		

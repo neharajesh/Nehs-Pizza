@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import entities.Order;
+import exceptions.RecordNotFoundException;
 import service.OrderService;
 
 @RestController
@@ -31,7 +32,7 @@ public class OrdersController {
 	//to get all live orders
 	@GetMapping("/orders/live")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL') or hasRole('DELIVERY')")
-	public String live(Model model) {
+	public String live(Model model) throws RecordNotFoundException{
 		List<Order> liveorders = orderService.findLiveOrders();
 		model.addAttribute("liveorders", liveorders);
 		return "ordersLive";
@@ -40,7 +41,7 @@ public class OrdersController {
 	//to get all past orders
 	@GetMapping("/orders/past")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public String past(Model model) {
+	public String past(Model model) throws RecordNotFoundException{
 		List<Order> pastorders = orderService.findPastOrders();
 		model.addAttribute("pastorders", pastorders);
 		return "ordersPast";
@@ -49,7 +50,7 @@ public class OrdersController {
 	//find order by id
 	@GetMapping("/orders/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public String findById(@RequestParam("id") int id, Model model) {
+	public String findById(@RequestParam("id") int id, Model model) throws RecordNotFoundException{
 		Order order = orderService.findOrderById(id);
 		model.addAttribute("order", order);
 		return "orderbyid";
@@ -58,8 +59,8 @@ public class OrdersController {
 	//add new order
 	@PostMapping("/neworder")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL') or hasRole('USER')")
-	public Order newOrder(@RequestBody Order newOrder) {
-		return orderService.addNewOrder(newOrder);
+	public Order newOrder(@RequestBody Order newOrder) throws RecordNotFoundException {
+		return null;//orderService.addNewOrder(newOrder);
 	}
 	
 	//add update order

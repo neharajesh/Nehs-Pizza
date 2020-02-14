@@ -11,9 +11,9 @@
     <h2>Sign Up</h2>
 
     <form action="#" th:action="@{/signup}" th:object="${signUpRequest}" method="post">
-    	<p>First Name: <input type="text" th:field="*{firstName}" /></p>
-        <p>Last Name: <input type="text" th:field="*{lastName}" /></p>
-        <p>Phone Number: <input type="text" th:field="*{phno}" /></p>
+    	<p>First Name: <input type="text" th:field="*{firstName}"  placeholder="enter your first name"/></p>
+        <p>Last Name: <input type="text" th:field="*{lastName}" placeholder="enter your last name"/></p>
+        <p>Phone Number: <input type="text" th:field="*{phno}" placeholder="enter your phone number"/></p>
         <p>Role: <select th:field="*{role}">
         			<option>Select Type of ID</option>
         			<option th:value="MANAGER" th:text="Manager">Manager</option>
@@ -22,8 +22,8 @@
         			<option th:value="USER" th:text="User">User</option>
         		</select>       
         </p>        
- 		<p>Email: <input type="email" th:field="*{email}" /></p>
-        <p>Password: <input type="password" th:field="*{password}" /></p>
+ 		<p>Email: <input type="email" th:field="*{email}" placeholder="enter your email"/></p>
+        <p>Password: <input type="password" th:field="*{password}" placeholder="enter your password"/></p>
         
         <p><input type="submit" value="Submit" /> 
          <input type="reset" value="Reset" />	</p>
