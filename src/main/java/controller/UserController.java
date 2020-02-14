@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import entities.User;
@@ -38,24 +39,16 @@ public class UserController {
 	//get user details by phno
 	@GetMapping("/users/{phno}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
-	public String getDetailsByPhno(@PathVariable String phno, Model model) {
-		/*User user = null;
-		try {
-			user =  userService.findUserByPhno(phno);
-		} catch(ResourceNotFoundException e){
-			model.addAttribute("errorMessage", "Contact not found");
-		}
-		model.addAttribute("user", user);
-		return "user";*/
+	public String getDetailsByPhno(@RequestParam String phno, Model model) {
 		User user = userService.findUserByPhno(phno);
 		model.addAttribute("user", user);
-		return "user";
+		return "userByPhno";
 	}
 	
 	//get user details by email
 	@GetMapping("/users/{email}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
-	public String getDetailsByEmail(@PathVariable String email, Model model) {
+	public String getDetailsByEmail(@RequestParam String email, Model model) {
 		User user = userService.findUserByEmail(email);
 		model.addAttribute("user", user);
 		return "user";
@@ -64,7 +57,7 @@ public class UserController {
 	//get users based on role
 	@GetMapping("/users/{usertype}")
 	@PreAuthorize("hasRole('MANAGER')")
-	public List<User> findUsersBasedOnRole(@PathVariable UserRoles roleName, Model model) {
+	public List<User> findUsersBasedOnRole(@RequestParam UserRoles roleName, Model model) {
 		List<User> listOfUsers = roleService.findUsersBasedOnRole(roleName);
 		model.addAttribute("user", listOfUsers);
 		return listOfUsers;
@@ -83,7 +76,7 @@ public class UserController {
 	
 	//update user details
 	@PostMapping("/users/update/{id}")
-	public String updateUserDetails(@RequestBody User updatingUser, Model model) {
+	public String updateUserDetails(@RequestParam User updatingUser, Model model) {
 		User updated = userService.updateUser(updatingUser);
 		model.addAttribute("updated", updated);
 		return "updatedUser";

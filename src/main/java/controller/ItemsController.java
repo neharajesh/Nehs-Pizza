@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import entities.Items;
@@ -32,7 +33,7 @@ public class ItemsController {
 	//items by id
 	@GetMapping("/items/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public String byId(@PathVariable int id, Model model) {
+	public String byId(@RequestParam int id, Model model) {
 		Items item =  itemsService.findItemById(id);
 		model.addAttribute("item", item);
 		return "itembyid";
@@ -57,7 +58,7 @@ public class ItemsController {
 	//find item by name
 	@PostMapping("/items/{name}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public Items findByName(@RequestBody String name, Model model) {
+	public Items findByName(@RequestParam String name, Model model) {
 		Items item = itemsService.findByItemName(name);
 		model.addAttribute("result", item);
 		return item;

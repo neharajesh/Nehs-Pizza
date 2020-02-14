@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import entities.Order;
 import service.OrderService;
@@ -49,7 +50,7 @@ public class OrdersController {
 	//find order by id
 	@GetMapping("/orders/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public String findById(@PathVariable int id, Model model) {
+	public String findById(@RequestParam int id, Model model) {
 		Order order = orderService.findOrderById(id);
 		model.addAttribute("order", order);
 		return "orderbyid";

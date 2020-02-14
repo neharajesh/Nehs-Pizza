@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import entities.Address;
@@ -29,7 +30,7 @@ public class AddressController {
 	
 	//find address by id
 	@GetMapping("/address/{id}")
-	public String findById(@PathVariable int id, Model model) {
+	public String findById(@RequestParam int id, Model model) {
 		Address address = addressService.findById(id);
 		model.addAttribute("address", address);
 		return "addressById";
@@ -37,7 +38,7 @@ public class AddressController {
 	
 	//find address by user id
 	@ModelAttribute("address/{userId}")
-	public String findByUser(@PathVariable int userId, Model model) {
+	public String findByUser(@RequestParam int userId, Model model) {
 		Address address = addressService.findByUserID(userId);
 		model.addAttribute("address", address);
 		return "addressByUserId";
