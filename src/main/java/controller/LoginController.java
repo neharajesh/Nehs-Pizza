@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import entities.User;
+import enums.UserRoles;
 import http.request.Login;
 import http.request.SignUp;
 import http.response.JwtResponse;
@@ -40,20 +42,37 @@ public class LoginController {
 	 
 	
 	@PostMapping("/signin")
-	    public ResponseEntity<?> authenticateUser(@Valid @RequestBody Login loginRequest) {
-	 
-	        Authentication authentication = authenticationManager.authenticate(
-	                new UsernamePasswordAuthenticationToken(
-	                        loginRequest.getPhno(),
-	                        loginRequest.getPassword()
-	                )
-	        );
-	 
-	        SecurityContextHolder.getContext().setAuthentication(authentication);
-	 
-	        String jwt = jwtProvider.generateJwtToken(authentication);
-	        return ResponseEntity.ok(new JwtResponse(jwt));
-	    }
+    public String authenticateUser(@Valid @RequestBody Login loginRequest) {
+ 
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getPhno(),
+                        loginRequest.getPassword()
+                )
+        );
+ 
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+ 
+        String jwt = jwtProvider.generateJwtToken(authentication);
+        ResponseEntity.ok(new JwtResponse(jwt));
+        
+        User user = userService.findUserByPhno(loginRequest.getPhno());
+        UserRoles userType = user.getUserType();
+        
+        String view = "";
+        switch (userType) {
+        	case MANAGER :
+        		view = "managerDashboard";
+        	case GENERAL :
+        		view = "generalDashboard";
+        	case DELIVERY :
+        		view = "deliveryDashboard";
+        	case USER :
+        		view = "userDashboard";
+        }
+        
+        return view;
+    }
 	
 	
 	@PostMapping("/signup")

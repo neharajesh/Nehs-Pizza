@@ -6,17 +6,17 @@ import javax.validation.constraints.Size;
 public class Login {
 	@NotBlank
 	@Size(min=2, max=60, message="Enter valid phone number")
-	private Long phno;
+	private String phno;
 	
 	@NotBlank
 	@Size(min=2, max=60, message="Enter valid password")
 	private String password;
 
-	public Long getPhno() {
+	public String getPhno() {
 		return phno;
 	}
 
-	public void setPhno(Long phno) {
+	public void setPhno(String phno) {
 		this.phno = phno;
 	}
 
