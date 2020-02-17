@@ -47,6 +47,14 @@ public class OrdersController {
 		return "ordersPast";
 	}
 	
+	//get past orders based on user id
+	@GetMapping("/orders/past/{id}")
+	public String pastBasedOnId(@RequestParam("id") int userId, Model model) throws RecordNotFoundException{
+		List<Order> pastorders = orderService.findPastOrdersBasedOnUserId(userId);
+		model.addAttribute("pastordersid", pastorders);
+		return "ordersPastById";
+	}
+	
 	//find order by id
 	@GetMapping("/orders/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")

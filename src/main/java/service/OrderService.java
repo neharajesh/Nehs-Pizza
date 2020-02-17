@@ -43,6 +43,11 @@ public class OrderService {
 		return null;
 	}
 	
+	//find past orders based on user id
+	public List<Order> findPastOrdersBasedOnUserId(int userId) {
+		return orderRepository.getOrdersByUserId(userId);
+	}
+	
 	//get order by id
 	public Order findOrderById(int id) {
 		Optional<Order> order = orderRepository.findById(id);

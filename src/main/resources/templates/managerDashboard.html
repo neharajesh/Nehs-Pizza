@@ -1,11 +1,37 @@
 <html>
-
+<html xmlns:th="https://www.thymeleaf.org"></html>
 <head>
-	<title>title</title>
+	<title>Manager Dashboard</title>
+	<link rel="stylesheet" href="../static/css/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
 <body>
-	It works!
+	<h1> Neh's Pizza </h1>    
+
+    <h2>Dashboard</h2>
+   
+    <div>
+			Orders :
+			<p> <a href="../templates/ordersAll.html">All Orders</a></p>
+			<p> <a href="../templates/ordersLive.html">Live Orders</a></p>
+			<p> <a href="../templates/ordersPast.html">Past Orders</a></p>
+			<p> <a href="../templates/orderbyid.html">Orders By ID</a></p>
+			<br/>
+
+			User Related :
+			<p> <a href="../templates/usersAll.html">All User Details</a></p>
+			<p> <a href="../templates/userByEmail.html">Find users by Email</a></p>
+			<p> <a href="../templates/userByPhno.html">Find users by Phone number</a></p>
+			<p> <a href="../templates/userUpdate.html">Update User Details</a></p>
+			<p> <a href="../templates/addressAll.html">All Address Details/a></p>
+			<p> <a href="../templates/addressById.html">Find address by ID</a></p>
+			<p> <a href="../templates/addressByUserId.html">Find address by user ID</a></p>
+
+			Items :
+			<p> <a href="../templates/items.html">All Items</a></p>
+			<p> <a href="../templates/updateitem.html">Update Items</a></p>
+    </div>
 </body>
 
 </html>
