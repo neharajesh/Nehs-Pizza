@@ -19,8 +19,21 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;*/
 
+import entities.Roles.RolesBuilder;
 import enums.UserRoles;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name="users")
 public class User {
@@ -28,24 +41,14 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-/*	@NotBlank
-    @Size(min = 3, max = 50)*/
 	private String firstName;
 	
-/*	@NotBlank
-    @Size(min = 3, max = 50)*/
 	private String lastName;
 	
-/*	@NotBlank
-	@Email*/
 	private String email;
 	
-/*	@NotBlank
-    @Size(max = 60, message="enter 10 digit phone number")*/
 	private String phno;
-	
-/*    @NotBlank
-    @Size(min = 6, max = 40, message="enter a valid password")*/
+
 	private String password;
 	
 	@OneToMany
@@ -61,7 +64,7 @@ public class User {
 	    //private Set<Roles> roles = new HashSet()<>();
 	 private Set<Roles> roles = new HashSet<>();
 	 
-	 public User() {}
+	 /*public User() {}
 	 
 	    public User(String firstName, String lastName, String phno, String email, String password) {
 	        this.firstName = firstName;
@@ -141,11 +144,11 @@ public class User {
 
 		public void setRoles(Set<Roles> roles) {
 			this.roles = roles;
-		}
+		}*/
 
 
 
-		public class Builder {
+		/*public class Builder {
 			 private  String firstName;
 			 private  String lastName;
 			 private  String phno;
@@ -185,7 +188,7 @@ public class User {
 			 public User build() {
 				 return new User(firstName, lastName, phno, email, password);
 			 }
-		}
+		}*/
 }
 	
 		

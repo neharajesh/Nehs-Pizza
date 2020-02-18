@@ -23,11 +23,11 @@ public class OrderService {
 	public List<Order> findLiveOrders() {
 		List<Order> all = orderRepository.findAll();
 		ArrayList<Order> live = new ArrayList<Order>();
-		for(Order orderEntity : all) {
+		/*for(Order orderEntity : all) {
 			if(orderEntity.getFlag() == 1) {
 				live.add(orderEntity);
 			}
-		}
+		}*/
 		return live;
 	}
 	
@@ -35,11 +35,11 @@ public class OrderService {
 	public List<Order> findPastOrders() {
 		List<Order> all = orderRepository.findAll();
 		ArrayList<Order> past = new ArrayList<Order>();
-		for(Order orderEntity : all) {
+		/*for(Order orderEntity : all) {
 			if(orderEntity.getFlag() == 0) {
 				past.add(orderEntity);
 			}
-		}
+		}*/
 		return null;
 	}
 	
@@ -63,7 +63,7 @@ public class OrderService {
 			updatedOrder.setDelivery(orderEntity.getDelivery());
 			updatedOrder.setExpectedDateTime(orderEntity.getExpectedDateTime());
 			updatedOrder.setExtraInstructions(orderEntity.getExtraInstructions());
-			updatedOrder.setFlag(orderEntity.getFlag());
+			//updatedOrder.setFlag(orderEntity.getFlag());
 			updatedOrder.setItemId(orderEntity.getItemId());
 			updatedOrder.setOrderedDateTime(orderEntity.getOrderedDateTime());
 			updatedOrder.setStaff(orderEntity.getStaff());

@@ -55,12 +55,12 @@ public class UserService {
 	
 	//add new user
 	public User addNewUser(SignUp signUpRequest) {
-		 User user = new User().new Builder()
-	                .setFirstName(signUpRequest.getFirstName())
-	                .setLastName(signUpRequest.getLastName())
-	                .setPhno(signUpRequest.getPhno())
-	                .setEmail(signUpRequest.getEmail())
-	                .setPassword(encoder.encode(signUpRequest.getPassword()))
+		 User user = User.builder()
+	                .firstName(signUpRequest.getFirstName())
+	                .lastName(signUpRequest.getLastName())
+	                .phno(signUpRequest.getPhno())
+	                .email(signUpRequest.getEmail())
+	                .password(encoder.encode(signUpRequest.getPassword()))
 	                .build();
 		 Set<UserRoles> strRoles = signUpRequest.getRole();
 	        Set<Roles> roles = new HashSet<>();

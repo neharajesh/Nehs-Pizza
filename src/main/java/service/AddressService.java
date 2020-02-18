@@ -35,7 +35,7 @@ public class AddressService {
 		Optional<Address> address = addressRepository.findById(addressEntity.getId());
 		if(address.isPresent()) {
 			Address updatedAddress = address.get();
-			updatedAddress.setUser(addressEntity.getUser());
+			//updatedAddress.setUser(addressEntity.getUser());
 			updatedAddress.setLocation(addressEntity.getLocation());
 			
 			return addressRepository.save(updatedAddress);

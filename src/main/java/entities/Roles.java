@@ -5,7 +5,19 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import enums.UserRoles;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor
 @Entity
 public class Roles {
 	private int id;
@@ -13,7 +25,7 @@ public class Roles {
 	@Enumerated(EnumType.STRING)
 	private UserRoles name;
 	
-	public int getId() {
+	/*public int getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -24,6 +36,6 @@ public class Roles {
 	}
 	public void setName(UserRoles name) {
 		this.name = name;
-	}
+	}*/
 	
 }

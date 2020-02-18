@@ -3,16 +3,25 @@ package entities;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import enums.StatusTypes;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name="order")
 public class Order {
@@ -25,16 +34,13 @@ public class Order {
 	private Date orderedDateTime;
 	private Date expectedDateTime;
 	private String extraInstructions;
-	//private StatusType status; 		//change this later
-	private int flag;
-	
+	private Status status; 		//change this later
+
 	@OneToOne
 	private Items itemId;
-	
-	@Enumerated(EnumType.STRING)
-	private StatusTypes status;
 
-	public int getId() {
+
+	/*public int getId() {
 		return id;
 	}
 
@@ -90,21 +96,13 @@ public class Order {
 		this.extraInstructions = extraInstructions;
 	}
 
-	public StatusTypes getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusTypes status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
-
-	public int getFlag() {
-		return flag;
-	}
-
-	public void setFlag(int flag) {
-		this.flag = flag;
-	}	
 
 	public Items getItemId() {
 		return itemId;
@@ -113,7 +111,7 @@ public class Order {
 	public void setItemId(Items itemId) {
 		this.itemId = itemId;
 	}
-	
+	*/
 	
 	
 }

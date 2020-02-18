@@ -9,7 +9,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import enums.ItemAttributes;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name="items")
 public class Items {
@@ -21,7 +33,7 @@ public class Items {
 	@Enumerated(EnumType.STRING)
 	private ItemAttributes itemAttributes;
 
-	public int getId() {
+	/*public int getId() {
 		return id;
 	}
 
@@ -43,6 +55,6 @@ public class Items {
 
 	public void setItemAttributes(ItemAttributes itemAttributes) {
 		this.itemAttributes = itemAttributes;
-	}
+	}*/
 	
 }
