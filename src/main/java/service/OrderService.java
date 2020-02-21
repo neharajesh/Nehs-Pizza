@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import entities.Order;
+import enums.StatusTypes;
 import repositories.OrderRepository;
 
 @Service
@@ -23,11 +24,12 @@ public class OrderService {
 	public List<Order> findLiveOrders() {
 		List<Order> all = orderRepository.findAll();
 		ArrayList<Order> live = new ArrayList<Order>();
-		/*for(Order orderEntity : all) {
-			if(orderEntity.getFlag() == 1) {
+		for(Order orderEntity : all) {
+			if(orderEntity.getStatus().getName() == StatusTypes.PLACED || 
+				orderEntity.getStatus().getName() == StatusTypes.PREPARING ) {
 				live.add(orderEntity);
 			}
-		}*/
+		}
 		return live;
 	}
 	
@@ -35,11 +37,12 @@ public class OrderService {
 	public List<Order> findPastOrders() {
 		List<Order> all = orderRepository.findAll();
 		ArrayList<Order> past = new ArrayList<Order>();
-		/*for(Order orderEntity : all) {
-			if(orderEntity.getFlag() == 0) {
+		for(Order orderEntity : all) {
+			if(orderEntity.getStatus().getName() == StatusTypes.DELIVERED ||
+				orderEntity.getStatus().getName() == StatusTypes.DISPATCHED) {
 				past.add(orderEntity);
 			}
-		}*/
+		}
 		return null;
 	}
 	
@@ -63,7 +66,6 @@ public class OrderService {
 			updatedOrder.setDelivery(orderEntity.getDelivery());
 			updatedOrder.setExpectedDateTime(orderEntity.getExpectedDateTime());
 			updatedOrder.setExtraInstructions(orderEntity.getExtraInstructions());
-			//updatedOrder.setFlag(orderEntity.getFlag());
 			updatedOrder.setItemId(orderEntity.getItemId());
 			updatedOrder.setOrderedDateTime(orderEntity.getOrderedDateTime());
 			updatedOrder.setStaff(orderEntity.getStaff());

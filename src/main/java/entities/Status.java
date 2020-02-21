@@ -25,17 +25,4 @@ public class Status {
 	@Enumerated(EnumType.STRING)
 	private StatusTypes name;
 	
-	/*public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public StatusTypes getName() {
-		return name;
-	}
-	public void setName(StatusTypes name) {
-		this.name = name;
-	}
-	*/
 }

@@ -33,28 +33,4 @@ public class Items {
 	@Enumerated(EnumType.STRING)
 	private ItemAttributes itemAttributes;
 
-	/*public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public ItemAttributes getItemAttributes() {
-		return itemAttributes;
-	}
-
-	public void setItemAttributes(ItemAttributes itemAttributes) {
-		this.itemAttributes = itemAttributes;
-	}*/
-	
 }

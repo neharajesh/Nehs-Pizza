@@ -24,18 +24,5 @@ public class Roles {
 	
 	@Enumerated(EnumType.STRING)
 	private UserRoles name;
-	
-	/*public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public UserRoles getName() {
-		return name;
-	}
-	public void setName(UserRoles name) {
-		this.name = name;
-	}*/
-	
+
 }

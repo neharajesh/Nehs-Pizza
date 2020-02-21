@@ -37,7 +37,7 @@ public class LoginController {
 	 
 	 @GetMapping("/")
 	 public String index(Model model) {
-		 return "home";
+		 return "index";
 	 }
 	 
 	

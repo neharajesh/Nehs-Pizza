@@ -1,5 +1,6 @@
 package enums;
 
 public enum StatusTypes {
-	PLACED, PREPARING, DISPATCHED, DELIVERED
+	PLACED,	PREPARING, DISPATCHED, DELIVERED
+	
 }
