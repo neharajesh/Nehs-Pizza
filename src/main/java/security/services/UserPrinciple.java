@@ -60,7 +60,7 @@ public class UserPrinciple implements UserDetails {
 	    	).collect(Collectors.toList());
 	    	
 	    	return new UserPrinciple(
-	    			user.getId(),
+	    			user.getUser(),
 	    			user.getFirstName(),
 	    			user.getLastName(),
 	    			user.getPhno(),

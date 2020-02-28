@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -34,7 +35,7 @@ import lombok.Setter;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int user;
 	
 	private String firstName;
 	
@@ -47,7 +48,7 @@ public class User {
 	private String password;
 	
 	@OneToMany
-	private Address addressId;
+	private List<Address> address;
 	
 	@Enumerated(EnumType.STRING)
 	private UserRoles userType;

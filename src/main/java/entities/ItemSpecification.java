@@ -3,8 +3,12 @@ package entities;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import enums.StatusTypes;
+import enums.ItemAttributes;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,10 +23,15 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @Entity
-public class Status {
-	private int id;
+@Table
+public class ItemSpecification {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int itemspec;
 	
 	@Enumerated(EnumType.STRING)
-	private StatusTypes name;
+	private ItemAttributes itemAttribute;
 	
+	private String value;
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import entities.Address;
+import exceptions.RecordNotFoundException;
 import repositories.AddressRepository;
 
 @Service
@@ -19,20 +20,30 @@ public class AddressService {
 	}
 	
 	//finding address by id
-	public Address findById(int id) {
+	public Address findById(int id) throws RecordNotFoundException {
 		Optional<Address> address =  addressRepository.findById(id);
-		return address.get();
+		if (address.isPresent()) {
+			return address.get();
+		}
+		else {
+			throw new RecordNotFoundException("Address not found!");
+		}
 	}
 	
 	//find address by user id
-	public Address findByUserID(int userid) {
+	public Address findByUserID(int userid) throws RecordNotFoundException {
 		Optional<Address> address = addressRepository.findByUserId(userid);
-		return address.get();
+		if(address.isPresent()) {
+			return address.get();
+		}
+		else {
+			throw new RecordNotFoundException("Address not found!");
+		}
 	}
 	
 	//new address
 	public Address addOrUpdateAddress(Address addressEntity) {
-		Optional<Address> address = addressRepository.findById(addressEntity.getId());
+		Optional<Address> address = addressRepository.findById(addressEntity.getAddress());
 		if(address.isPresent()) {
 			Address updatedAddress = address.get();
 			updatedAddress.setLocation(addressEntity.getLocation());

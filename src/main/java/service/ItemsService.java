@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import entities.Items;
+import exceptions.RecordNotFoundException;
 import repositories.ItemsRepository;
 
 @Service
@@ -20,14 +21,19 @@ public class ItemsService {
 	}
 	
 	//find items by id
-	public Items findItemById(int id) {
+	public Items findItemById(int id) throws RecordNotFoundException {
 		Optional<Items> item = itemsRepository.findById(id);
-		return item.get();
+		if(item.isPresent()) {
+			return item.get();
+		}
+		else {
+			throw new RecordNotFoundException("Item is not found!");
+		}
 	}
 	
 	//add new items
 	public Items addOrUpdateItem(Items itemsEntity) {
-		Optional<Items> items = itemsRepository.findById(itemsEntity.getId());
+		Optional<Items> items = itemsRepository.findById(itemsEntity.getItems());
 		if(items.isPresent()) {
 			Items updatedItems = items.get();
 			updatedItems.setItemAttributes(itemsEntity.getItemAttributes());

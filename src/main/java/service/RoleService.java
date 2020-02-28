@@ -17,5 +17,6 @@ public class RoleService {
 	//find users based on role
 	public List<User> findUsersBasedOnRole(UserRoles roleName) {
 		return roleRepository.findUsersByRole(roleName);
+		
 	}
 }

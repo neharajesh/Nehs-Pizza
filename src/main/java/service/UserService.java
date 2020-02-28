@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import entities.Roles;
 import entities.User;
 import enums.UserRoles;
+import exceptions.RecordNotFoundException;
 import http.request.SignUp;
 import repositories.RoleRepository;
 import repositories.UserRepository;
@@ -32,15 +33,25 @@ public class UserService {
 	}
 	
 	//find user details by email
-	public User findUserByEmail(String email) {
+	public User findUserByEmail(String email) throws RecordNotFoundException {
 		Optional<User> user = userRepository.findByEmail(email);
-		return user.get();
+		if(user.isPresent()) {
+			return user.get();
+		}
+		else {
+			throw new RecordNotFoundException("User not found!");
+		}
 	}
 	
 	//find user by phone number
-	public User findUserByPhno(String phno) {
+	public User findUserByPhno(String phno) throws RecordNotFoundException {
 		Optional<User> user = userRepository.findByPhno(phno);
-		return user.get();
+		if(user.isPresent()) {
+			return user.get();
+		}
+		else {
+			throw new RecordNotFoundException("User not found!");
+		}
 	}
 	
 	//check if user exists by phno

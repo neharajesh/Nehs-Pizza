@@ -27,7 +27,7 @@ import lombok.Setter;
 public class Items {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int items;
 	private String name;
 	
 	@Enumerated(EnumType.STRING)
