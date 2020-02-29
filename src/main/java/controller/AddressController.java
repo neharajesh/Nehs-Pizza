@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import beans.AddressDTO;
 import entities.Address;
 import exceptions.RecordNotFoundException;
 import service.AddressService;
@@ -23,7 +24,7 @@ public class AddressController {
 	//find all addresses
 	@GetMapping("/address/all")
 	public String all(Model model) {
-		List<Address> addressList = addressService.findAddress();
+		List<AddressDTO> addressList = addressService.findAddress();
 		model.addAttribute("addressList", addressList);
 		return "addressAll";
 	}
@@ -31,7 +32,7 @@ public class AddressController {
 	//find address by id
 	@GetMapping("/address/{id}")
 	public String findById(@RequestParam("id") int id, Model model) throws RecordNotFoundException{
-		Address address = addressService.findById(id);
+		AddressDTO address = addressService.findById(id);
 		model.addAttribute("address", address);
 		return "addressById";
 	}
@@ -39,7 +40,7 @@ public class AddressController {
 	//find address by user id
 	@ModelAttribute("address/{userId}")
 	public String findByUser(@RequestParam("userId") int userId, Model model) throws RecordNotFoundException{
-		Address address = addressService.findByUserID(userId);
+		AddressDTO address = addressService.findByUserID(userId);
 		model.addAttribute("address", address);
 		return "addressByUserId";
 	}

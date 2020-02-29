@@ -3,9 +3,11 @@ package service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import beans.AddressDTO;
 import entities.Address;
 import exceptions.RecordNotFoundException;
 import repositories.AddressRepository;
@@ -14,16 +16,35 @@ import repositories.AddressRepository;
 public class AddressService {
 	@Autowired
 	private AddressRepository addressRepository;
-
-	public List<Address> findAddress() {
-		return addressRepository.findAll();
+	
+	public AddressDTO convertEntityToBean(Address entity) {
+		AddressDTO bean = new AddressDTO();
+		BeanUtils.copyProperties(entity, bean);
+		return bean;
+	}
+	
+	public Address convertBeanToEntity(AddressDTO bean) {
+		Address entity = new Address();
+		BeanUtils.copyProperties(bean, entity);
+		return entity;
+	}
+	
+	//return all addresses
+	public List<AddressDTO> findAddress() {
+		List<Address> address = addressRepository.findAll();
+		List<AddressDTO> addressDto = null;
+		BeanUtils.copyProperties(address, addressDto);
+		return addressDto;
 	}
 	
 	//finding address by id
-	public Address findById(int id) throws RecordNotFoundException {
+	@SuppressWarnings("null")
+	public AddressDTO findById(int id) throws RecordNotFoundException {
 		Optional<Address> address =  addressRepository.findById(id);
-		if (address.isPresent()) {
-			return address.get();
+		Optional<AddressDTO> addressDto = null;
+		BeanUtils.copyProperties(address, addressDto);
+		if (addressDto.isPresent()) {
+			return addressDto.get();
 		}
 		else {
 			throw new RecordNotFoundException("Address not found!");
@@ -31,10 +52,13 @@ public class AddressService {
 	}
 	
 	//find address by user id
-	public Address findByUserID(int userid) throws RecordNotFoundException {
+	@SuppressWarnings("null")
+	public AddressDTO findByUserID(int userid) throws RecordNotFoundException {
 		Optional<Address> address = addressRepository.findByUserId(userid);
-		if(address.isPresent()) {
-			return address.get();
+		Optional<AddressDTO> addressDto = null;
+		BeanUtils.copyProperties(address, addressDto);
+		if(addressDto.isPresent()) {
+			return addressDto.get();
 		}
 		else {
 			throw new RecordNotFoundException("Address not found!");
@@ -42,13 +66,19 @@ public class AddressService {
 	}
 	
 	//new address
+	@SuppressWarnings("null")
 	public Address addOrUpdateAddress(Address addressEntity) {
 		Optional<Address> address = addressRepository.findById(addressEntity.getAddress());
-		if(address.isPresent()) {
-			Address updatedAddress = address.get();
-			updatedAddress.setLocation(addressEntity.getLocation());
-			
-			return addressRepository.save(updatedAddress);
+		Optional<AddressDTO> addressDto = null;
+		BeanUtils.copyProperties(address, addressDto);
+		AddressDTO addressBean = new AddressDTO();
+		BeanUtils.copyProperties(addressEntity, addressBean);
+		if(addressDto.isPresent()) {
+			AddressDTO updatedAddress = addressDto.get();
+			updatedAddress.setLocation(addressBean.getLocation());
+			Address updateAddress = new Address();
+			BeanUtils.copyProperties(updatedAddress, updateAddress);
+			return addressRepository.save(updateAddress);
 		}
 		else 
 			return addressRepository.save(addressEntity);

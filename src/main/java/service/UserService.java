@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import beans.UserDTO;
 import entities.Roles;
 import entities.User;
 import enums.UserRoles;
@@ -26,17 +28,35 @@ public class UserService {
 	 
 	 @Autowired
 	 private RoleRepository roleRepository;
+	 
+	 public UserDTO convertEntityToBean(User entity) {
+		 UserDTO bean = new UserDTO();
+		 BeanUtils.copyProperties(entity, bean);
+		 return bean;
+	 }
+	 
+	 public User convertBeanToEntity(UserDTO bean) {
+		 User entity = new User();
+		 BeanUtils.copyProperties(bean, entity);
+		 return entity;
+	 }
 	
 	//find and return all user details
-	public List<User> findAllUserDetails() {
-		return userRepository.findAll();
+	public List<UserDTO> findAllUserDetails() {
+		List<User> userList = userRepository.findAll();
+		List<UserDTO> userBeanList = null;
+		BeanUtils.copyProperties(userList, userBeanList);
+		return userBeanList;
 	}
 	
 	//find user details by email
-	public User findUserByEmail(String email) throws RecordNotFoundException {
+	@SuppressWarnings("null")
+	public UserDTO findUserByEmail(String email) throws RecordNotFoundException {
 		Optional<User> user = userRepository.findByEmail(email);
-		if(user.isPresent()) {
-			return user.get();
+		Optional<UserDTO> userDto = null;
+		BeanUtils.copyProperties(user, userDto);
+		if(userDto.isPresent()) {
+			return userDto.get();
 		}
 		else {
 			throw new RecordNotFoundException("User not found!");
@@ -44,10 +64,13 @@ public class UserService {
 	}
 	
 	//find user by phone number
-	public User findUserByPhno(String phno) throws RecordNotFoundException {
+	@SuppressWarnings("null")
+	public UserDTO findUserByPhno(String phno) throws RecordNotFoundException {
 		Optional<User> user = userRepository.findByPhno(phno);
-		if(user.isPresent()) {
-			return user.get();
+		Optional<UserDTO> userDto = null;
+		BeanUtils.copyProperties(user, userDto);
+		if(userDto.isPresent()) {
+			return userDto.get();
 		}
 		else {
 			throw new RecordNotFoundException("User not found!");
@@ -116,5 +139,6 @@ public class UserService {
 	//update user
 	public User updateUser(User userEntity) {
 		return userRepository.save(userEntity);
+		
 	}
 }

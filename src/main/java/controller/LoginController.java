@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import entities.User;
+import beans.UserDTO;
 import enums.UserRoles;
+import exceptions.RecordNotFoundException;
 import http.request.Login;
 import http.request.SignUp;
 import http.response.JwtResponse;
@@ -42,7 +43,7 @@ public class LoginController {
 	 
 	
 	@PostMapping("/signin")
-    public String authenticateUser(@Valid @RequestBody Login loginRequest) {
+    public String authenticateUser(@Valid @RequestBody Login loginRequest) throws RecordNotFoundException {
  
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -56,7 +57,7 @@ public class LoginController {
         String jwt = jwtProvider.generateJwtToken(authentication);
         ResponseEntity.ok(new JwtResponse(jwt));
         
-        User user = userService.findUserByPhno(loginRequest.getPhno());
+        UserDTO user = userService.findUserByPhno(loginRequest.getPhno());
         UserRoles userType = user.getUserType();
         
         String view = "";

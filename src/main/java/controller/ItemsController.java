@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import beans.ItemsDTO;
 import entities.Items;
 import exceptions.RecordNotFoundException;
 import service.ItemsService;
@@ -24,7 +25,7 @@ public class ItemsController {
 	@PostMapping("/items")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String all(Model model) {
-		List<Items> item = itemsService.findAllItems();
+		List<ItemsDTO> item = itemsService.findAllItems();
 		model.addAttribute("itemlist", item);
 		return "items";
 	}
@@ -33,7 +34,7 @@ public class ItemsController {
 	@GetMapping("/items/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String byId(@RequestParam int id, Model model) throws RecordNotFoundException{
-		Items item =  itemsService.findItemById(id);
+		ItemsDTO item =  itemsService.findItemById(id);
 		model.addAttribute("item", item);
 		return "itembyid";
 	}
@@ -57,8 +58,8 @@ public class ItemsController {
 	//find item by name
 	@PostMapping("/items/{name}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public Items findByName(@RequestParam String name, Model model)throws RecordNotFoundException{
-		Items item = itemsService.findByItemName(name);
+	public ItemsDTO findByName(@RequestParam String name, Model model)throws RecordNotFoundException{
+		ItemsDTO item = itemsService.findByItemName(name);
 		model.addAttribute("result", item);
 		return item;
 	}

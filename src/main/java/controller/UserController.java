@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import beans.UserDTO;
 import entities.User;
 import enums.UserRoles;
 import exceptions.RecordNotFoundException;
@@ -31,7 +32,7 @@ public class UserController {
 	public String all(
 					/*@RequestBody User user, */
 					Model model) {
-		List<User> allUsers = userService.findAllUserDetails();
+		List<UserDTO> allUsers = userService.findAllUserDetails();
 		model.addAttribute("users", allUsers);
 		return "usersAll";
 	}
@@ -40,7 +41,7 @@ public class UserController {
 	@GetMapping("/users/{phno}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
 	public String getDetailsByPhno(@RequestParam("phno") String phno, Model model) throws RecordNotFoundException{
-		User user = userService.findUserByPhno(phno);
+		UserDTO user = userService.findUserByPhno(phno);
 		model.addAttribute("user", user);
 		return "userByPhno";
 	}
@@ -49,7 +50,7 @@ public class UserController {
 	@GetMapping("/users/{email}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
 	public String getDetailsByEmail(@RequestParam("email") String email, Model model) throws RecordNotFoundException{
-		User user = userService.findUserByEmail(email);
+		UserDTO user = userService.findUserByEmail(email);
 		model.addAttribute("user", user);
 		return "userByEmail";
 	}
