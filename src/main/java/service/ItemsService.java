@@ -17,18 +17,6 @@ public class ItemsService {
 	@Autowired
 	private ItemsRepository itemsRepository;
 	
-	public ItemsDTO convertEntityToBean(Items entity) {
-		ItemsDTO bean = new ItemsDTO();
-		BeanUtils.copyProperties(entity, bean);
-		return bean;
-	}
-	
-	public Items convertBeanToEntity(ItemsDTO bean) {
-		Items entity = new Items();
-		BeanUtils.copyProperties(bean, entity);
-		return entity;
-	}
-	
 	//find and return all items on the menu, with attributes
 	public List<ItemsDTO> findAllItems() {
 		List<Items> items = itemsRepository.findAll();

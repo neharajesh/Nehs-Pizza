@@ -22,7 +22,7 @@ public class ItemsController {
 	private ItemsService itemsService;
 	
 	//all items
-	@PostMapping("/items")
+	@GetMapping("/items")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String all(Model model) {
 		List<ItemsDTO> item = itemsService.findAllItems();
@@ -56,7 +56,7 @@ public class ItemsController {
 	}
 	
 	//find item by name
-	@PostMapping("/items/{name}")
+	@GetMapping("/items/{name}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public ItemsDTO findByName(@RequestParam String name, Model model)throws RecordNotFoundException{
 		ItemsDTO item = itemsService.findByItemName(name);

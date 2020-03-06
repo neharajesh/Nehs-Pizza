@@ -28,18 +28,6 @@ public class UserService {
 	 
 	 @Autowired
 	 private RoleRepository roleRepository;
-	 
-	 public UserDTO convertEntityToBean(User entity) {
-		 UserDTO bean = new UserDTO();
-		 BeanUtils.copyProperties(entity, bean);
-		 return bean;
-	 }
-	 
-	 public User convertBeanToEntity(UserDTO bean) {
-		 User entity = new User();
-		 BeanUtils.copyProperties(bean, entity);
-		 return entity;
-	 }
 	
 	//find and return all user details
 	public List<UserDTO> findAllUserDetails() {

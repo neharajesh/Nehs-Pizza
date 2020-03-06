@@ -17,18 +17,6 @@ public class AddressService {
 	@Autowired
 	private AddressRepository addressRepository;
 	
-	public AddressDTO convertEntityToBean(Address entity) {
-		AddressDTO bean = new AddressDTO();
-		BeanUtils.copyProperties(entity, bean);
-		return bean;
-	}
-	
-	public Address convertBeanToEntity(AddressDTO bean) {
-		Address entity = new Address();
-		BeanUtils.copyProperties(bean, entity);
-		return entity;
-	}
-	
 	//return all addresses
 	public List<AddressDTO> findAddress() {
 		List<Address> address = addressRepository.findAll();
