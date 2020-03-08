@@ -26,9 +26,9 @@ import security.jwt.JwtProvider;
 import service.UserService;
 
 @RestController
-@RequestMapping(LoginController.BASE_URL)
+//@RequestMapping(LoginController.BASE_URL)
 public class LoginController {
-	static final String BASE_URL = "/api/auth";
+	//static final String BASE_URL = "";
 	 @Autowired
 	 private AuthenticationManager authenticationManager;
 	 
@@ -39,13 +39,13 @@ public class LoginController {
 	 private UserService userService;
 	 
 	 @GetMapping("/")
-	 public String index(Model model) {
+	 public String index() {
 		 return "index";
 	 }
 	 
 	
 	@PostMapping("/signin")
-    public String authenticateUser(@Valid @RequestBody Login loginRequest) throws RecordNotFoundException {
+    public String authenticateUser(@Valid @RequestBody Login loginRequest, Model model) throws RecordNotFoundException {
  
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -74,22 +74,22 @@ public class LoginController {
         		view = "userDashboard";
         }
         
-        return view;
+        return "signin";
     }
 	
 	
 	@PostMapping("/signup")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody SignUp signUpRequest) {
-        if(userService.checkByPhno(signUpRequest.getPhno())) {
-            return new ResponseEntity<String>("Fail -> Username is already taken!", HttpStatus.BAD_REQUEST);
+    public String registerUser(@Valid @RequestBody SignUp signUpRequest) {
+        /*if(userService.checkByPhno(signUpRequest.getPhno())) {
+            //return new ResponseEntity<String>("Fail -> Username is already taken!", HttpStatus.BAD_REQUEST);
         }
         else if(userService.checkByEmail(signUpRequest.getEmail())) {
-        	return new ResponseEntity<String>("Fail -> Username is already taken!", HttpStatus.BAD_REQUEST);
+        	//return new ResponseEntity<String>("Fail -> Username is already taken!", HttpStatus.BAD_REQUEST);
         }
-        else{
+        else{*/
         	userService.addNewUser(signUpRequest);
-        	return new ResponseEntity<String>("User registered successfully!", HttpStatus.OK);
-        }
+        	return "signup"; //new ResponseEntity<String>("User registered successfully!", HttpStatus.OK);
+        
 	}
 	
 	//after login, go to user/usertype specific page

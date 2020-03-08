@@ -1,27 +1,43 @@
-/*package integrationTests;
+package integrationTests;
 
+import java.util.List;
 import java.util.Optional;
-
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import beans.UserDTO;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import entities.User;
 import repositories.UserRepository;
+import service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 public class UserRepositoryIntegrationTest {
-
+	/*private final String USER_FIRST_NAME = "neha";
+	private final String USER_LAST_NAME = "rajesh";*/
+	private final String USER_EMAIL = "leehanseok3@gmail.com";
     private final String USER_PHNO = "23428553";
-    private final String USER_EMAIL = "leehanseok3@gmail.com";
-
+    /*private final String USER_PASSWORD = "neharajesh";*/
+    
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private UserService userService;
+    
+    @Test
+    public void getAllUserDetails() {
+    	List<UserDTO> users = userService.findAllUserDetails();
+    	assertThat(users.size() > 1);
+    	
+    }
 
     @Test
     public void givenEmptyDBWhenFindByPhnoThenReturnEmptyOptional() {
@@ -67,24 +83,9 @@ public class UserRepositoryIntegrationTest {
           .getEmail()).isEqualTo(USER_EMAIL);
     }
 
-    @Test
-    public void givenUserInDBWhenFindOneByStatusAsyncThenReturnCompletableFutureUser() throws ExecutionException, InterruptedException {
-        User user = new User();
-        user.setName(USER_NAME_ADAM);
-        user.setStatus(ACTIVE_STATUS);
-        userRepository.save(user);
-
-        CompletableFuture<User> userByStatus = userRepository.findOneByStatus(ACTIVE_STATUS);
-
-        assertThat(userByStatus
-          .get()
-          .getName()).isEqualTo(USER_NAME_ADAM);
-    }
-
     @After
     public void cleanUp() {
         userRepository.deleteAll();
     }
 
 }
-*/

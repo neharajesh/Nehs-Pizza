@@ -41,7 +41,7 @@ public class UserController {
 	}
 	
 	//get user details by phno
-	@GetMapping("/{phno}")
+	@GetMapping("{phno}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
 	public String getDetailsByPhno(@RequestParam("phno") String phno, Model model) throws RecordNotFoundException{
 		UserDTO user = userService.findUserByPhno(phno);
@@ -50,7 +50,7 @@ public class UserController {
 	}
 	
 	//get user details by email
-	@GetMapping("/{email}")
+	@GetMapping("{email}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
 	public String getDetailsByEmail(@RequestParam("email") String email, Model model) throws RecordNotFoundException{
 		UserDTO user = userService.findUserByEmail(email);
@@ -59,7 +59,7 @@ public class UserController {
 	}
 		
 	//get users based on role
-	@GetMapping("/{usertype}")
+	@GetMapping("{usertype}")
 	@PreAuthorize("hasRole('MANAGER')")
 	public List<User> findUsersBasedOnRole(@RequestParam UserRoles roleName, Model model) throws RecordNotFoundException{
 		List<User> listOfUsers = roleService.findUsersBasedOnRole(roleName);
