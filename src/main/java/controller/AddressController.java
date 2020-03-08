@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,12 +18,14 @@ import exceptions.RecordNotFoundException;
 import service.AddressService;
 
 @RestController
+@RequestMapping(AddressController.BASE_URL)
 public class AddressController {
+	static final String BASE_URL = "/api/auth/address";
 	@Autowired
 	private AddressService addressService;
 	
 	//find all addresses
-	@GetMapping("/address/all")
+	@GetMapping("/all")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String all(Model model) {
 		List<AddressDTO> addressList = addressService.findAddress();
@@ -31,7 +34,7 @@ public class AddressController {
 	}
 	
 	//find address by id
-	@GetMapping("/address/{id}")
+	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String findById(@RequestParam("id") int id, Model model) throws RecordNotFoundException{
 		AddressDTO address = addressService.findById(id);
@@ -40,7 +43,7 @@ public class AddressController {
 	}
 	
 	//find address by user id
-	@GetMapping("address/{userId}")	
+	@GetMapping("/{userId}")	
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String findByUser(@RequestParam("userId") int userId, Model model) throws RecordNotFoundException{
 		AddressDTO address = addressService.findByUserID(userId);
@@ -49,7 +52,7 @@ public class AddressController {
 	}
 	
 	//add new address 
-	@PostMapping("/address/new")
+	@PostMapping("/new")
 	public Address addNewAddress(@RequestBody Address addressEntity) throws RecordNotFoundException{
 		return addressService.addOrUpdateAddress(addressEntity);
 	}

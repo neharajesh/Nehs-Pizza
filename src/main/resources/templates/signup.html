@@ -10,7 +10,7 @@
 
     <h2>Sign Up</h2>
     <div>
-    <form action="#" th:action="@{/signup}" th:object="${signUpRequest}" method="post">
+    <form action="/signup" th:action="@{/signup}" th:object="${signUpRequest}" method="post">
     	<p>First Name: <input type="text" th:field="*{firstName}"  placeholder="enter your first name"/></p>
         <p>Last Name: <input type="text" th:field="*{lastName}" placeholder="enter your last name"/></p>
         <p>Phone Number: <input type="text" th:field="*{phno}" placeholder="enter your phone number"/></p>

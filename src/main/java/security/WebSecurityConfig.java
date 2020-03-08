@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().
+       /* http.cors().and().csrf().disable().
                 authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .anyRequest().authenticated()
@@ -63,6 +63,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);*/
+    	
+    	http.cors().and().csrf().disable()
+	    	.authorizeRequests()
+		        .antMatchers("/api/auth/**").permitAll()
+		        .anyRequest().authenticated()
+		        .and()
+		    .formLogin()
+		        .loginPage("/signup")
+		        .permitAll()
+		        .and()
+		    .exceptionHandling()
+		    	.authenticationEntryPoint(unauthorizedHandler)
+		    	.and()
+            .sessionManagement()
+            	.sessionCreationPolicy(SessionCreationPolicy.STATELESS);	
+    	
+    	 http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
+    
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .inMemoryAuthentication()
+                .withUser("user").password("password").roles("USER, ADMIN");
     }
 }

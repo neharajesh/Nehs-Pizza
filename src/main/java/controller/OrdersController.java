@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import entities.Order;
@@ -16,12 +17,14 @@ import exceptions.RecordNotFoundException;
 import service.OrderService;
 
 @RestController
+@RequestMapping(OrdersController.BASE_URL)
 public class OrdersController {
+	static final String BASE_URL = "/api/auth/orders";
 	@Autowired
 	private OrderService orderService;
 	
 	//to get all orders
-	@GetMapping("/orders")
+	@GetMapping()
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String all (Model model) {
 		List<Order> orders = orderService.findAllOrders();
@@ -30,7 +33,7 @@ public class OrdersController {
 	}
 	
 	//to get all live orders
-	@GetMapping("/orders/live")
+	@GetMapping("/live")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL') or hasRole('DELIVERY')")
 	public String live(Model model) throws RecordNotFoundException{
 		List<Order> liveorders = orderService.findLiveOrders();
@@ -39,7 +42,7 @@ public class OrdersController {
 	}
 	
 	//to get all past orders
-	@GetMapping("/orders/past")
+	@GetMapping("/past")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String past(Model model) throws RecordNotFoundException{
 		List<Order> pastorders = orderService.findPastOrders();
@@ -48,7 +51,7 @@ public class OrdersController {
 	}
 	
 	//get past orders based on user id
-	@GetMapping("/orders/past/{id}")
+	@GetMapping("/past/{id}")
 	public String pastBasedOnId(@RequestParam("id") int userId, Model model) throws RecordNotFoundException{
 		List<Order> pastorders = orderService.findPastOrdersBasedOnUserId(userId);
 		model.addAttribute("pastordersid", pastorders);
@@ -56,7 +59,7 @@ public class OrdersController {
 	}
 	
 	//find order by id
-	@GetMapping("/orders/{id}")
+	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String findById(@RequestParam("id") int id, Model model) throws RecordNotFoundException{
 		Order order = orderService.findOrderById(id);
@@ -65,7 +68,7 @@ public class OrdersController {
 	}
 	
 	//add new order
-	@PostMapping("/neworder")
+	@PostMapping("/new")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL') or hasRole('USER')")
 	public Order newOrder(@RequestBody Order newOrder) throws RecordNotFoundException {
 		return null;//orderService.addNewOrder(newOrder);

@@ -11,8 +11,4 @@ public class NehsPizzaApplication {
 		SpringApplication.run(NehsPizzaApplication.class, args);
 	}
 	
-	@GetMapping("/")
-	 public String index(Model model) {
-		 return "index";
-	 }
 }
