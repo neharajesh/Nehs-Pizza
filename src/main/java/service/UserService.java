@@ -14,7 +14,7 @@ import entities.Roles;
 import entities.User;
 import enums.UserRoles;
 import exceptions.RecordNotFoundException;
-import http.request.SignUp;
+//import http.request.SignUp;
 import repositories.RoleRepository;
 import repositories.UserRepository;
 
@@ -76,7 +76,7 @@ public class UserService {
 		}
 	
 	//add new user
-	public User addNewUser(SignUp signUpRequest) {
+	/*public User addNewUser(SignUp signUpRequest) {
 		 User user = User.builder()
 	                .firstName(signUpRequest.getFirstName())
 	                .lastName(signUpRequest.getLastName())
@@ -117,7 +117,7 @@ public class UserService {
 	        user.setRoles(roles);
 		
 		return userRepository.save(user);
-	}
+	}*/
 	
 	//delete user
 	public void deleteUser(User userEntity) {

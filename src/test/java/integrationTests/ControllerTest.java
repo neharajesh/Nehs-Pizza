@@ -1,4 +1,4 @@
-package integrationTests;
+/*package integrationTests;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -15,3 +15,4 @@ public class ControllerTest {
 		assertEquals(result,"index");
 	}
 }
+*/

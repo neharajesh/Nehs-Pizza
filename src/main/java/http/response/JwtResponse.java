@@ -1,4 +1,4 @@
-package http.response;
+/*package http.response;
 
 public class JwtResponse {
     private String token;
@@ -23,4 +23,4 @@ public class JwtResponse {
     public void setTokenType(String tokenType) {
         this.type = tokenType;
     }
-}
+}*/

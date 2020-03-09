@@ -11,7 +11,7 @@
     
 	<h2>Update User</h2>
 	
-	<form action="#" th:action="@{/user/update/{id}(id=${user.id})}" th:object="${user}" method="post">
+	<form action="/user/update/{id}" th:object="${user}" method="post">
 		<p>First Name :<input type="text" th:field="*{firstName}" placeholder="enter first name"/></p>
 		<p>Last Name : <input type="text" th:field="*{lastName}" placeholder="enter last name"/></p>	
 		<p>Email : <input type="email" th:field="*{email}" placeholder="enter email" /></p>

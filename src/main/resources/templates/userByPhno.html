@@ -19,7 +19,7 @@ obtain result from the controller
 
     <h2>Search User Details</h2>
    
-    <form action="#" th:action="@{/users/{phno}}" th:object="${user}" method="post">
+    <form action="/users/{phno}" th:object="${user}" method="GET">
         <p>Phone Number: <input type="text" th:field="*{phno}" placeholder="Enter phone number to search" /></p>
         <p><input type="submit" value="Search User" />	</p>
 	</form>

@@ -1,4 +1,4 @@
-package security;
+/*package security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-       /* http.cors().and().csrf().disable().
+        http.cors().and().csrf().disable().
                 authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .anyRequest().authenticated()
@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);*/
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     	
     	http.cors().and().csrf().disable()
 	    	.authorizeRequests()
@@ -89,4 +89,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER, ADMIN");
     }
-}
+}*/

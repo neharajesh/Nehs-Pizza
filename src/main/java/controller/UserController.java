@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.bind.annotation.RestController;
 
 import beans.UserDTO;
 import entities.User;
@@ -19,10 +20,11 @@ import exceptions.RecordNotFoundException;
 import service.RoleService;
 import service.UserService;
 
-@RestController
-@RequestMapping(UserController.BASE_URL)
+//@RestController
+@Controller
+//@RequestMapping(UserController.BASE_URL)
 public class UserController {
-	static final String BASE_URL = "/api/auth/user";
+	//static final String BASE_URL = "/user";
 	@Autowired
 	private UserService userService;
 	
@@ -30,7 +32,7 @@ public class UserController {
 	private RoleService roleService;
 	
 	//get all user details
-	@GetMapping("/all")
+	@GetMapping("/usersAll")
 	@PreAuthorize("hasRole('MANAGER')")
 	public String all(
 					/*@RequestBody User user, */
@@ -41,16 +43,17 @@ public class UserController {
 	}
 	
 	//get user details by phno
-	@GetMapping("{phno}")
+	@GetMapping("/user/{phno}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
 	public String getDetailsByPhno(@RequestParam("phno") String phno, Model model) throws RecordNotFoundException{
 		UserDTO user = userService.findUserByPhno(phno);
+		System.out.println(user.getEmail());
 		model.addAttribute("user", user);
 		return "userByPhno";
 	}
 	
 	//get user details by email
-	@GetMapping("{email}")
+	@GetMapping("/user/{email}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
 	public String getDetailsByEmail(@RequestParam("email") String email, Model model) throws RecordNotFoundException{
 		UserDTO user = userService.findUserByEmail(email);
@@ -59,7 +62,7 @@ public class UserController {
 	}
 		
 	//get users based on role
-	@GetMapping("{usertype}")
+	@GetMapping("/user/{usertype}")
 	@PreAuthorize("hasRole('MANAGER')")
 	public List<User> findUsersBasedOnRole(@RequestParam UserRoles roleName, Model model) throws RecordNotFoundException{
 		List<User> listOfUsers = roleService.findUsersBasedOnRole(roleName);
@@ -79,7 +82,7 @@ public class UserController {
 	}
 	
 	//update user details
-	@PostMapping("/update/{id}")
+	@PostMapping("/user/update/{id}")
 	public String updateUserDetails(@RequestParam User updatingUser, Model model) {
 		User updated = userService.updateUser(updatingUser);
 		model.addAttribute("updated", updated);

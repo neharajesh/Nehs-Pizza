@@ -1,4 +1,4 @@
-package controller;
+/*package controller;
 
 import javax.validation.Valid;
 
@@ -80,18 +80,19 @@ public class LoginController {
 	
 	@PostMapping("/signup")
     public String registerUser(@Valid @RequestBody SignUp signUpRequest) {
-        /*if(userService.checkByPhno(signUpRequest.getPhno())) {
+        if(userService.checkByPhno(signUpRequest.getPhno())) {
             //return new ResponseEntity<String>("Fail -> Username is already taken!", HttpStatus.BAD_REQUEST);
         }
         else if(userService.checkByEmail(signUpRequest.getEmail())) {
         	//return new ResponseEntity<String>("Fail -> Username is already taken!", HttpStatus.BAD_REQUEST);
         }
-        else{*/
+        else{
         	userService.addNewUser(signUpRequest);
         	return "signup"; //new ResponseEntity<String>("User registered successfully!", HttpStatus.OK);
         
 	}
 	
 	//after login, go to user/usertype specific page
-	/*@RequestMapping*/
+	@RequestMapping
 }
+*/
