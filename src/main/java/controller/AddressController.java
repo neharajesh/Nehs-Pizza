@@ -2,6 +2,8 @@ package controller;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
 //import org.springframework.web.bind.annotation.RestController;
 
 import beans.AddressDTO;
@@ -22,7 +24,7 @@ import service.AddressService;
 //@RestController
 //@RequestMapping(AddressController.BASE_URL)
 public class AddressController {
-	//static final String BASE_URL = "/api/auth/address";
+	//static final String BASE_URL = "/api/address";
 	@Autowired
 	private AddressService addressService;
 	
@@ -36,18 +38,18 @@ public class AddressController {
 	}
 	
 	//find address by id
-	@GetMapping("/address/{id}")
+	@GetMapping("/address/id/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public String findById(@RequestParam("id") int id, Model model) throws RecordNotFoundException{
+	public String findById(@PathParam("id") int id, Model model) throws RecordNotFoundException{
 		AddressDTO address = addressService.findById(id);
 		model.addAttribute("address", address);
 		return "addressById";
 	}
 	
 	//find address by user id
-	@GetMapping("/address/{userId}")	
+	@GetMapping("/address/userId/{userId}")	
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public String findByUser(@RequestParam("userId") int userId, Model model) throws RecordNotFoundException{
+	public String findByUser(@PathParam("userId") int userId, Model model) throws RecordNotFoundException{
 		AddressDTO address = addressService.findByUserID(userId);
 		model.addAttribute("address", address);
 		return "addressByUserId";

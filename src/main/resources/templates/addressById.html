@@ -11,7 +11,7 @@
 
     <h2>Search Address Details</h2>
    
-    <form action="/address/{id}" th:object="${address}" method="GETs">
+    <form action="/address/id/{id}" th:object="${address}" method="GETs">
         <p>Phone Number: <input type="number" th:field="*{id}" placeholder="Enter id to search" /></p>
         <p><input type="submit" value="Search Address" />	</p>
 	</form>

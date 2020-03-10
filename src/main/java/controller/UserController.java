@@ -2,6 +2,8 @@ package controller;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,7 @@ import service.UserService;
 @Controller
 //@RequestMapping(UserController.BASE_URL)
 public class UserController {
-	//static final String BASE_URL = "/user";
+	//static final String BASE_URL = "/api/user";
 	@Autowired
 	private UserService userService;
 	
@@ -43,9 +45,9 @@ public class UserController {
 	}
 	
 	//get user details by phno
-	@GetMapping("/user/{phno}")
+	@GetMapping("/user/phno/{phno}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
-	public String getDetailsByPhno(@RequestParam("phno") String phno, Model model) throws RecordNotFoundException{
+	public String getDetailsByPhno(@PathParam("phno") String phno, Model model) throws RecordNotFoundException{
 		UserDTO user = userService.findUserByPhno(phno);
 		System.out.println(user.getEmail());
 		model.addAttribute("user", user);
@@ -53,18 +55,18 @@ public class UserController {
 	}
 	
 	//get user details by email
-	@GetMapping("/user/{email}")
+	@GetMapping("/user/email/{email}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('STAFF')")
-	public String getDetailsByEmail(@RequestParam("email") String email, Model model) throws RecordNotFoundException{
+	public String getDetailsByEmail(@PathParam("email") String email, Model model) throws RecordNotFoundException{
 		UserDTO user = userService.findUserByEmail(email);
 		model.addAttribute("user", user);
 		return "userByEmail";
 	}
 		
 	//get users based on role
-	@GetMapping("/user/{usertype}")
+	@GetMapping("/user/usertype/{usertype}")
 	@PreAuthorize("hasRole('MANAGER')")
-	public List<User> findUsersBasedOnRole(@RequestParam UserRoles roleName, Model model) throws RecordNotFoundException{
+	public List<User> findUsersBasedOnRole(@PathParam("usertype") UserRoles roleName, Model model) throws RecordNotFoundException{
 		List<User> listOfUsers = roleService.findUsersBasedOnRole(roleName);
 		model.addAttribute("user", listOfUsers);
 		return listOfUsers;

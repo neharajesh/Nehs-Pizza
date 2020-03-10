@@ -2,6 +2,8 @@ package controller;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -10,9 +12,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RestController;
 
 import beans.ItemsDTO;
 import entities.Items;
@@ -23,7 +25,7 @@ import service.ItemsService;
 //@RestController
 //@RequestMapping(ItemsController.BASE_URL)
 public class ItemsController {
-	//static final String BASE_URL = "/api/auth/items";
+	//static final String BASE_URL = "/api/items";
 	@Autowired
 	private ItemsService itemsService;
 	
@@ -37,9 +39,9 @@ public class ItemsController {
 	}
 	
 	//items by id
-	@GetMapping("/items/{id}")
+	@GetMapping("/items/id/{id}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public String byId(@RequestParam int id, Model model) throws RecordNotFoundException{
+	public String byId(@PathParam("id") int id, Model model) throws RecordNotFoundException{
 		ItemsDTO item =  itemsService.findItemById(id);
 		model.addAttribute("item", item);
 		return "itembyid";
@@ -62,9 +64,9 @@ public class ItemsController {
 	}
 	
 	//find item by name
-	@GetMapping("/items/{name}")
+	@GetMapping("/items/name/{name}")
 	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
-	public ItemsDTO findByName(@RequestParam String name, Model model)throws RecordNotFoundException{
+	public ItemsDTO findByName(@PathParam("name") String name, Model model)throws RecordNotFoundException{
 		ItemsDTO item = itemsService.findByItemName(name);
 		model.addAttribute("result", item);
 		return item;
