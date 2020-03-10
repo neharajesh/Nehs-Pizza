@@ -1,4 +1,4 @@
-/*package web;
+package web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -17,10 +17,10 @@ public class WebConfig implements WebMvcConfigurer {
                 "/css/**",
                 "../templates/**")
                 .addResourceLocations(
-                        "classpath:/META-INF/resources/webjars/",
+                        "classpath:/META-INF/resources/",
                         "classpath:/static/img/",
                         "classpath:/static/css/",
                         "classpath:/templates/");
     }
 
-}*/
+}

@@ -1,4 +1,4 @@
-/*package security.services;
+package security.services;
 
 import java.util.Collection;
 import java.util.List;
@@ -37,21 +37,6 @@ public class UserPrinciple implements UserDetails {
         this.email=email;
         this.password = password;
         this.authorities = authorities;
-	    }
-	 
-	    public static UserPrinciple build(UserEntity user) {
-	        List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
-	                new SimpleGrantedAuthority(role.getName().name())
-	        ).collect(Collectors.toList());
-	 
-	        return new UserPrinciple(
-	                user.getId(),
-	                user.getFirstName(),
-	                user.getLastName(),
-	                user.getPhno(),
-	                user.getPassword(),
-	                authorities
-	        );
 	    }
 	    
 	    public static UserPrinciple build(User user) {
@@ -129,4 +114,4 @@ public class UserPrinciple implements UserDetails {
 	        UserPrinciple user = (UserPrinciple) o;
 	        return Objects.equals(id, user.id);
 	    }
-	}*/
+	}

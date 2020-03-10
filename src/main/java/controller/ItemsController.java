@@ -12,26 +12,26 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController;
 
 import beans.ItemsDTO;
 import entities.Items;
 import exceptions.RecordNotFoundException;
 import service.ItemsService;
 
-@Controller
-//@RestController
-//@RequestMapping(ItemsController.BASE_URL)
+//@Controller
+@RestController
+@RequestMapping(ItemsController.BASE_URL)
 public class ItemsController {
-	//static final String BASE_URL = "/api/items";
+	static final String BASE_URL = "/items";
 	@Autowired
 	private ItemsService itemsService;
 	
 	//all items
-	@GetMapping("/items")
-	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
+	@GetMapping("/all")
+	//@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String all(Model model) {
 		List<ItemsDTO> item = itemsService.findAllItems();
 		model.addAttribute("itemlist", item);
@@ -39,8 +39,8 @@ public class ItemsController {
 	}
 	
 	//items by id
-	@GetMapping("/items/id/{id}")
-	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
+	@GetMapping("/id/{id}")
+	//@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String byId(@PathParam("id") int id, Model model) throws RecordNotFoundException{
 		ItemsDTO item =  itemsService.findItemById(id);
 		model.addAttribute("item", item);
@@ -49,7 +49,7 @@ public class ItemsController {
 	
 	//add new item
 	@PostMapping("/new")
-	@PreAuthorize("hasRole('MANAGER')")
+	//@PreAuthorize("hasRole('MANAGER')")
 	public String newItem(@RequestBody Items item, Model model) throws RecordNotFoundException{
 		//Items item = itemsService.addNewItem(item);
 		model.addAttribute("item", item);
@@ -57,15 +57,15 @@ public class ItemsController {
 	}
 	
 	//remove an item
-	@PreAuthorize("hasRole('MANAGER')")
-	@DeleteMapping("/items/delete/{id}")
+	//@PreAuthorize("hasRole('MANAGER')")
+	@DeleteMapping("/delete/{id}")
 	public void deleteItem(@RequestBody Items item) throws RecordNotFoundException{
 		itemsService.deleteItem(item);
 	}
 	
 	//find item by name
-	@GetMapping("/items/name/{name}")
-	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
+	@GetMapping("/name/{name}")
+	//@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public ItemsDTO findByName(@PathParam("name") String name, Model model)throws RecordNotFoundException{
 		ItemsDTO item = itemsService.findByItemName(name);
 		model.addAttribute("result", item);
@@ -73,7 +73,7 @@ public class ItemsController {
 	}
 	
 	//update item
-	@PostMapping("/items/update/{id}")
+	@PostMapping("/update/{id}")
 	public String updateItemDetails(@RequestBody Items updatingItem, Model model) throws RecordNotFoundException{
 		Items updated = itemsService.addOrUpdateItem(updatingItem);
 		model.addAttribute("updated", updated);

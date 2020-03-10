@@ -1,4 +1,4 @@
-/*package security.services;
+package security.services;
 
 import javax.transaction.Transactional;
 
@@ -30,10 +30,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return UserPrinciple.build(user);
     }
     
-    public UserDetails loadUserByPhno(Long phno){
-    	UserEntity user = userRepository.findByPhno(phno)
+    /*public UserDetails loadUserByPhno(String phno){
+    	User user = userRepository.findByPhno(phno)
     			.orElseThrow(() - >
-    			new PhnoNotFoundException("User not found with phone number : "+phno)
+    			new RecordNotFoundException("User not found with phone number : "+phno)
     			);
-    }
-}*/
+    }*/
+}

@@ -11,26 +11,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController;
 
 import beans.AddressDTO;
 import entities.Address;
 import exceptions.RecordNotFoundException;
 import service.AddressService;
 
-@Controller
-//@RestController
-//@RequestMapping(AddressController.BASE_URL)
+//@Controller
+@RestController
+@RequestMapping(AddressController.BASE_URL)
 public class AddressController {
-	//static final String BASE_URL = "/api/address";
+	static final String BASE_URL = "/address";
 	@Autowired
 	private AddressService addressService;
 	
 	//find all addresses
-	@GetMapping("/addressAll")
-	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
+	@GetMapping("/all")
+	//@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String all(Model model) {
 		List<AddressDTO> addressList = addressService.findAddress();
 		model.addAttribute("addressList", addressList);
@@ -38,8 +38,8 @@ public class AddressController {
 	}
 	
 	//find address by id
-	@GetMapping("/address/id/{id}")
-	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
+	@GetMapping("/id/{id}")
+	//@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String findById(@PathParam("id") int id, Model model) throws RecordNotFoundException{
 		AddressDTO address = addressService.findById(id);
 		model.addAttribute("address", address);
@@ -47,8 +47,8 @@ public class AddressController {
 	}
 	
 	//find address by user id
-	@GetMapping("/address/userId/{userId}")	
-	@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
+	@GetMapping("/userId/{userId}")	
+	//@PreAuthorize("hasRole('MANAGER') or hasRole('GENERAL')")
 	public String findByUser(@PathParam("userId") int userId, Model model) throws RecordNotFoundException{
 		AddressDTO address = addressService.findByUserID(userId);
 		model.addAttribute("address", address);

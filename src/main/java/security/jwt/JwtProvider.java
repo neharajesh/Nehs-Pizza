@@ -1,4 +1,4 @@
-/*package security.jwt;
+package security.jwt;
 
 import java.util.Date;
 import org.slf4j.Logger;
@@ -63,4 +63,4 @@ public class JwtProvider {
         
         return false;
     }
-}*/
+}
